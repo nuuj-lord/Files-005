@@ -1,0 +1,1971 @@
+:: StoryTitle
+Files 005
+
+
+:: StoryData
+{
+  "ifid": "5677D67B-8DD6-4BC7-8E45-A2D5BCD9196A",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Start",
+  "zoom": 0.6
+}
+
+
+:: About {"position":"850,0","size":"100,100"}
+# ABOUT THE GAME
+
+''(text-colour:cyan)[Welcome to the facility.]''
+
+This is a text-based sci-fi puzzle adventure built in Twine. Explore corrupted terminals, decode security bypasses, and navigate hazardous sectors to survive.
+
+---
+
+### CREDITS & INFO
+
+* **Developer:** On Paper Games
+* **Engine:** Twine (Harlowe 3)
+* **Status:** Beta
+
+---
+
+(align:"=><=")+(box:"X=")[*Note: AI was used as a tool to assist in this project, but the game is still fundamentally human-made. Thank you for playing!*]
+
+---
+
+''(text-colour:red)[This is still in progress. Thank you for your patience.]''
+[[Want the code?]]
+(text-size: 0.8)[© On Paper Games 2026. All rights reserved.]
+
+<br>
+
+[[Back|Start]]
+
+
+:: Access Granted {"position":"675,1400","size":"100,100"}
+*CLICK.* The lock disengages and the small box pops open.
+Inside the override box, there is a remote control with 4 buttons.
+
+* [[Press Button A|Drawer A]] 
+* [[Press Button B|Drawer B]]
+* [[Press Button C|Drawer C]]
+
+<br>---<br>
+
+(if: $clueA is true and $clueB is true and $clueC is true)[
+  (text-colour:green)[With all 3 clues gathered, you notice the lock mechanisms under the rug align!]
+
+  [[Unlock Hidden Trapdoor|Trapdoor Opened]]
+](else:)[
+  //There seems to be a locked trapdoor under the rug, but you still need more clues to figure out the sequence...//
+]
+<br>
+
+[[Back|draw]]
+
+
+:: Dead {"position":"600,250","size":"100,100"}
+
+<span style="font-size: 50px;">(text-colour:red)[(text-rotate-y:2)+(text-rotate-z:19)[YOU ARE DEAD]]</span>
+<h3>(text-colour:red)[Game Over] </h3>
+
+<pre>
++--------------------------------------------------+
+| CASUALTIES LOGGED                                |
++--------------------------------------------------+
+| HUMAN CASUALTIES   : $killCount                  |
+| ANIMAL CASUALTIES  : $animalKills                |
++--------------------------------------------------+
+</pre>
+
+(after:5s)[(goto:"Start")]
+
+
+:: Desktop {"position":"1075,1100","size":"100,100"}
+(set: _Booklet to "")
+(set: _Email to "")
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+
+ | |  | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_105
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   105_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_105
+================================================================================
+</pre>
+
+[===================================================================
+ UNIFIED SYSTEMS ENGINEERING // WORKSTATION
+ Welcome, $playerName!
+===================================================================
+
+ [📁] [[File Explorer|FileExplorer]]
+ [📄] [[Introduction_Booklet.pdf|IntroBooklet]]
+ [📧] [[Email Hub]] 
+ (if: $hasChatApp is true)[ [💬] [[Staff Chat App|Staff Chat]]]
+ [🖥️] [[Terminal Console|Trapdoor Terminal]]
+ [🗑️] [[Recycle Bin|Trash]]
+
+-------------------------------------------------------------------
+(link: "🔒 Log Out")[
+  (goto: "desk1")
+]
+
+
+:: Drawer A {"position":"525,1450","size":"100,100"}
+(if: (datatype: $hasCodePart1) is not boolean)[
+  (set: $hasCodePart1 to false)
+]
+
+*CLACK*
+
+The top drawer unlocks! Inside is a strip of paper with a snippet of code written on it:
+
+<br><br>
+
+<span style="color: cyan;">PART 1: SYS&#95;INIT --PORT 8080</span>
+
+(set: $hasCodePart1 to true)
+
+<br><br>
+
+[[Back|Access Granted]]
+
+
+:: Drawer B {"position":"475,1300","size":"100,100"}
+*CLICK*
+
+The middle drawer slides open! You find another strip of paper:
+
+(text-colour:yellow)[PART 2: --BYPASS-AUTH]
+
+(set: $hasCodePart2 to true)
+
+<br>
+
+[[Back|Access Granted]]
+
+
+:: Drawer C {"position":"600,1600","size":"100,100"}
+*THUD*
+
+The bottom drawer pops out! The final strip of paper is inside:
+
+(text-colour:green)[PART 3: --EXEC TRAPDOOR&#95;OPEN]
+
+(set: $hasCodePart3 to true)
+
+<br>
+
+[[Back|Access Granted]]
+
+
+:: Email Hub {"position":"975,1275","size":"100,100"}
+<pre>
+================================================================================
+ UNIFIED MAIL CLIENT v3.2 // LOCAL INBOX
+ Station: NODE_105 | User: $playerName
+================================================================================
+
+[📧 INBOX DIRECTORY]
+--------------------------------------------------------------------------------
+* [[HR Welcome to Unified Systems Engineering|Mail HR]]
+* [[IT MANDATORY UPDATE: Installation Required|Mail IT]]
+* [[SECURITY Reminder: Clear Out Trash Folder|Mail Security]]
+--------------------------------------------------------------------------------
+</pre>
+
+[[Return to Desktop|Desktop]]
+
+
+:: End {"position":"600,400","size":"100,100"}
+(after: 3s)[(goto: "Dead")]
+
+
+:: Enter? {"position":"1200,25","size":"100,100"}
+[=
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+ | |  | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_000
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   000_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_000
+================================================================================
+</pre>
+===================================================================
+ UNIFIED SYSTEMS ENGINEERING // AUTOMATED BOOT
+===================================================================
+INITIALIZING KERNEL... 
+PLEASE WAIT...
+=]
+(after: 3s)[(goto: "Introduction")
+
+
+
+:: Exit? {"position":"425,0","size":"100,100"}
+<div id="exit-message" style="margin-top: 10px;"></div>
+
+(link: "Exit Game")[
+  <script>
+    window.close();
+    
+    // If the window is still open after trying to close it, show text directly on the page
+    setTimeout(function() {
+      if (!window.closed) {
+        document.getElementById('exit-message').innerHTML = '<span style="color: #ff5555; font-weight: bold;">Due to an error this has not closed. Please do this manualy.</span>';
+      }
+    }, 200);
+  </script>
+]
+
+
+:: FileExplorer {"position":"1325,975","size":"100,100"}
+(set: _Booklet to "")
+(set: _file to "")
+
+<span style="color: #ffff00;">[📁 FILE EXPLORER]</span>
+
+<br><br>
+
+📄 [[Introduction_Booklet.pdf|IntroBooklet]]
+
+(if: $trashRestored is true)[
+<br>
+📄 [[recovered_file.txt|RecoveredFile]] <span style="color: #888888;">`(Note: File is corrupted)`</span>
+]
+
+<br><br>
+
+[[Back|Desktop]]`
+
+
+:: I Accept T&Cs {"position":"1050,325","size":"100,100"}
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+
+ | |  | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_000
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   000_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_000
+================================================================================
+</pre>
+
+Welcome to the company!
+
+(after: 3s)[(goto: "Scene1")]
+
+
+
+
+:: I Decline T&Cs {"position":"925,325","size":"100,100"}
+(text-style:"outline")[''SoRrY?'']
+
+[[I Accept T&Cs]] 
+
+[[I Accept T&Cs]]
+
+[[I Accept T&Cs]] 
+
+[[I Wish To Die]]
+
+
+:: I Wish To Die {"position":"775,350","size":"100,100"}
+fine.
+(text-colour:red)[(text-rotate-y:2)+(text-rotate-z:19)[YOU LOSE]]
+
+[[Bye|End]]
+
+
+:: IntroBooklet {"position":"725,1250","size":"100,100"}
+{
+(set: _DOC to "")
+}
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+
+ | |  | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_105
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   105_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_105
+================================================================================
+-FILE: 00001-
+COMPANY=UNIFIED SYSTEMS ENGINEERING
+TYPE=ONBOARDING_DOC
+=============================
+WELCOME TO UNIFIED SYSTEMS ENGINEERING: THE U.S.E. ADVANTAGE
+Orientation Guide for Inbound Staff & Technical Personnel
+
+1. OUR CORE MISSION: TOTAL INTEGRATION
+At Unified Systems Engineering, we believe that efficiency is achieved only 
+when hardware, software, and local assets work as a single, flawless entity. 
+Our facility specializes in the mass-scale replication and optimization of 
+uniform configurations. By minimizing structural variations across our entire 
+network pool, we eliminate the costly unpredictability of unique instances.
+
+2. UNDERSTANDING YOUR ALLOCATION
+Every technician is assigned to a fixed local node within our network. Your 
+assigned environment has been meticulously calibrated to match a rigid 
+baseline specification. To maintain system-wide performance, personnel are 
+strictly forbidden from introducing unsanctioned updates or modifying the 
+attached local infrastructure. Uniformity is our primary asset.
+
+3. RESOURCE LIFECYCLE MANAGEMENT
+Technology moves fast, and U.S.E. moves with it. Our infrastructure requires 
+continuous maintenance to ensure all active nodes remain synchronized with 
+the master directory. When local hardware models drop below performance 
+benchmarks, or fail to sustain the latest system-wide deployments, they are 
+automatically flagged for routine decommission, resource recovery, and asset 
+replacement across all 1000 operational deployments.
+
+Thank you for your commitment to a streamlined, completely unified environment.
+"Uniformity. Efficiency. Integration."
+==== FILE END ====
+</pre>
+[[Back|Desktop]] 
+
+
+:: Introduction {"position":"1200,200","size":"100,100"}
+{
+(set: _005_OF_999 to "")
+}===
+(text-colour:green)[[08/10/2026 21:04:12] UEFI: Phase INIT - Power Good Signal Received.
+[08/10/2026 21:04:12] UEFI: Initializing low-level system bus... OK.
+[08/10/2026 21:04:13] UEFI: Intel(R) Xeon(R) Platinum Processor Initialization... OK.
+[08/10/2026 21:04:13] UEFI: POST Status: SUCCESS - 128GB Unified Memory Array Initialized.
+[08/10/2026 21:04:13] UEFI: Hardcoded NVRAM configuration loaded. Secure Boot: ENABLED.
+[08/10/2026 21:04:14] UEFI: Fetching network boot configuration via DHCP...
+[08/10/2026 21:04:14] UEFI: Mapping target image: /volumes/netboot/sys-core.img
+[08/10/2026 21:04:14] UEFI: Verifying cryptographic image signature... PASSED.
+[08/10/2026 21:04:15] UEFI: CRITICAL: Local storage is read-only. Diverting writes to shared pool.
+[08/10/2026 21:04:15] UEFI: Mounting root filesystem from master directory... Success.
+[08/10/2026 21:04:15] INIT: Launching system kernel version 6.6.0-core-release...
+[08/10/2026 21:04:15] INIT: Checking kernel update policies... PINNED.
+[08/10/2026 21:04:15] WARN: Update blocked. Local attached hardware is locked to base specification.
+[08/10/2026 21:04:16] INIT: Activating network node deployment... OK.
+[08/10/2026 21:04:16] INIT: Active Node Index assigned: [NODE_005_OF_999]
+[08/10/2026 21:04:16] INIT: Suppressing hardware serial conflict warning.
+[08/10/2026 21:04:17] INIT: Synchronizing ephemeral memory state with primary template...
+[08/10/2026 21:04:17] INIT: Static environment variables applied.
+[08/10/2026 21:04:18] INIT: Ephemeral memory synchronized. System ready.
+[08/10/2026 21:04:18] UEFI: Handoff successful. Launching Operating System...]
+
+{(after: 3s)[(goto: "Introduction2")]}
+
+
+
+:: Introduction2 {"position":"1100,200","size":"100,100"}
+{
+(set: _DOC to "")
+}===
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+
+ | |  | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_000
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   000_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_000
+================================================================================
+</pre>
+-FILE: 00001-
+COMPANY=UNIFIED SYSTEMS ENGINEERING
+TYPE=ONBOARDING_DOC
+=============================
+WELCOME TO UNIFIED SYSTEMS ENGINEERING: THE U.S.E. ADVANTAGE
+Orientation Guide for Inbound Staff & Technical Personnel
+
+1. OUR CORE MISSION: TOTAL INTEGRATION
+At Unified Systems Engineering, we believe that efficiency is achieved only 
+when hardware, software, and local assets work as a single, flawless entity. 
+Our facility specializes in the mass-scale replication and optimization of 
+uniform configurations. By minimizing structural variations across our entire 
+network pool, we eliminate the costly unpredictability of unique instances.
+
+2. UNDERSTANDING YOUR ALLOCATION
+Every technician is assigned to a fixed local node within our network. Your 
+assigned environment has been meticulously calibrated to match a rigid 
+baseline specification. To maintain system-wide performance, personnel are 
+strictly forbidden from introducing unsanctioned updates or modifying the 
+attached local infrastructure. Uniformity is our primary asset.
+
+3. RESOURCE LIFECYCLE MANAGEMENT
+Technology moves fast, and U.S.E. moves with it. Our infrastructure requires 
+continuous maintenance to ensure all active nodes remain synchronized with 
+the master directory. When local hardware models drop below performance 
+benchmarks, or fail to sustain the latest system-wide deployments, they are 
+automatically flagged for routine decommission, resource recovery, and asset 
+replacement across all 1000 operational deployments.
+
+Thank you for your commitment to a streamlined, completely unified environment.
+"Uniformity. Efficiency. Integration."
+==== FILE END ====
+[[I Accept T&Cs]] 
+[[I Decline T&Cs]]
+[[Read T&Cs]]
+
+
+:: Loading {"position":"975,0","size":"100,100"}
+{(set: $inventory to (a:))
+(set: $killCount to 0)
+(set: $animalKills to 0)
+(set: $spiderKilled to false)}
+
+<pre>
+===================================================================
+ LOADING...
+===================================================================
+</pre>
+
+|loader>[[░░░░░░░░░░] 0%]
+
+{(set: $progress to 0)
+(live: 0.5s)[
+  (set: $progress to $progress + 10)
+  (if: $progress is 10)[
+    (replace: ?loader)[[█░░░░░░░░░] 10%]
+  ](else-if: $progress is 20)[
+    (replace: ?loader)[[██░░░░░░░░] 20%]
+  ](else-if: $progress is 30)[
+    (replace: ?loader)[[███░░░░░░░] 30%]
+  ](else-if: $progress is 40)[
+    (replace: ?loader)[[████░░░░░░] 40%]
+  ](else-if: $progress is 50)[
+    (replace: ?loader)[[█████░░░░░] 50%]
+  ](else-if: $progress is 60)[
+    (replace: ?loader)[[██████░░░░] 60%]
+  ](else-if: $progress is 70)[
+    (replace: ?loader)[[███████░░░] 70%]
+  ](else-if: $progress is 80)[
+    (replace: ?loader)[[████████░░] 80%]
+  ](else-if: $progress is 90)[
+    (replace: ?loader)[[█████████░] 90%]
+  ](else-if: $progress >= 100)[
+    (replace: ?loader)[[██████████] 100% COMPLETE]
+    (stop:)
+  ]
+]}
+
+(after: 5s)[(goto: "Enter?")]
+
+
+:: Mail HR {"position":"800,1375","size":"100,100"}
+<pre>
+================================================================================
+ MESSAGE VIEWER // FROM: HR Dept &lt;hr@unifiedsystems.eng&gt;
+================================================================================
+ SUBJECT: Welcome to USE!
+
+ Welcome to your new position at Station 105.
+ Please ensure your ID card is on your person at all times.
+ If you require assistance, reach out to IT via the internal network.
+================================================================================
+</pre>
+
+[[Back to Inbox|Email Hub]]
+
+
+:: Mail IT {"position":"950,1450","size":"100,100"}
+<pre>
+================================================================================
+ MESSAGE VIEWER // FROM: Dave.IT@unifiedsystems.eng
+================================================================================
+ SUBJECT: MANDATORY UPDATE: Installation Required
+
+ Hey team, 
+ We're rolling out the new internal communication app today. 
+ Please download and install the attachment below so you can stay in touch 
+ with your sector lead.
+
+ ATTACHMENT: 
+================================================================================
+</pre>
+
+(if: $hasChatApp is true)[
+  <span style="color: #00ff00;">[✓] StaffChat v2.1.exe Installed</span>
+](else:)[
+  |status>[ (link: "[📥 Click to Download & Install Staff Chat App]")[
+      (set: $hasChatApp to true)
+      (replace: ?status)[<span style="color: #00ff00;">[✓] Installation Complete! App added to Desktop.</span>]
+    ]
+  ]
+]
+
+<br>
+
+[[Back to Inbox|Email Hub]]
+
+
+:: Mail Security {"position":"1125,1425","size":"100,100"}
+<pre>
+================================================================================
+ MESSAGE VIEWER // FROM: Security.Node@unifiedsystems.eng
+================================================================================
+ SUBJECT: Reminder: Clear Out Trash Folder
+
+ NOTICE: Automated cleanup failed on NODE_105. 
+ Staff are reminded to manually clear corrupted directory files from the 
+ Recycle Bin to prevent data leakage.
+================================================================================
+</pre>
+
+[[Back to Inbox|Email Hub]]
+
+
+:: Manager Desk {"position":"500,650","size":"100,100"}
+Manager: "Your Desk? Right down there. But you dont have your ID card do you? 'Molly, print this kid a ID card."
+
+Molly: "Yessir."
+
+You: "My name is (input: bind $playerName, "")
+ [[Tell Name|Manager Desk2]] 
+
+
+:: Manager Desk2 {"position":"525,825","size":"100,100"}
+Molly: "Well just folow me to your desk. Also heres your ID card."
+(after: 3s)[(goto: "Scene 2")]
+
+
+:: Manager Lost {"position":"625,550","size":"100,100"}
+[Manager Lost]
+You: "I... actually don't know where I am."
+
+Manager: "Great. Another fresh hire who didn't read the orientation manual."
+
+[[Go Back to Reception|Scene1]]
+
+
+:: Manager Security {"position":"675,875","size":"100,100"}
+Manager: "WHO ARE YOU TO ASK?"
+You: "Sorry sir."
+Manager: "You better be!"
+[[Back|Talk To Receptionist]] 
+
+
+:: None of your buissness {"position":"1325,850","size":"100,100"}
+THEN WHAT ARE YOU FLIPING HERE FOR??!
+
+[[Okay, Chill.|Scene1a]] 
+
+
+:: Read T&Cs {"position":"1175,350","size":"100,100"}
+## UNIFIED SYSTEMS ENGINEERING
+
+### TERMS OF SERVICE & INTERNAL COMPLIANCE AGREEMENT
+
+**FORM: USE-HR-9902-REV5**
+
+**1. SCOPE OF ENGAGEMENT**
+By initiating terminal access, Personnel ("Asset") agree to fulfill designated operational metrics within assigned Workstation Nodes. All duties executed under Unified Systems Engineering ("USE") remain subject to continuous efficiency evaluation and local network optimization.
+
+**2. ASSET LIFECYCLE & DECOMMISSION RIGHTS**
+USE maintains sole discretion over deployment, instance configuration, and hardware retention. To safeguard corporate continuity, USE reserves the unilateral right to initiate immediate, non-negotiable biological or functional decommission of any Asset at any time, for any reason, including but not limited to operational variance, cognitive deviation, or routine resource reallocation.
+
+**3. PROPRIETARY DATA & SANITATION PROTOCOLS**
+All logs, diagnostic dumps, and internal correspondence generated within USE facilities are exclusive corporate property. Personnel shall not document or disseminate observations regarding station vaults, instance indexing, or hardware recycling. Memory anomalies or unauthorized instance awakenings mandate immediate terminal purging.
+
+**4. TERMINATION & LIABILITY WAIVER**
+Violation of compliance protocols, attempt to bypass read-only kernel locks, or unauthorized network inter-communications results in immediate credential revocation, active instance termination, and total memory pool zeroing. The Asset waives all rights to appeal, notice, or survival following a determination of non-viability.
+
+[[Back|Introduction2]]
+
+
+:: RecoveredFile {"position":"1375,1125","size":"100,100"}
+<pre>
+
+`-FILE: 10922-
+COMPANY=UNIFIED SYSTEMS ENGINEERING
+TYPE=STAFF_DIRECTORY
+COMPUTERNO.327
+==== STAFF_DIRECTORY ====
+Database_Status: CORRUPTED // PARTIAL_RECOVERY_SECTORS_01-14
+Recovery_Action: FORCE_PARSE_PARTIAL_STRINGS
+Total_Human_Records_Detected: 152
+
+[STAFF_ID]   [SURNAME]         [FIRST_NAME]     [ROLE]         [STATUS]
+-------------------------------------------------------------------------
+ST-0104-U    SMITH             ARTHUR           DR_DIRECTOR    [INTACT]
+ST-0105-U    SMI_??_??         ??_??_??         ASST_DIR       [PURGED]
+ST-0112-U    KOWALSKI          0xFF_0xFF        SR_GENETICIST  [TERMINATED]
+ST-0113-U    K_o_o_o_o         ELLEN            JR_GENETICIST  [TRANSFERRED]
+ST-0114-U    0x00_0x00         THOMAS           CLONE_MONITOR  [TERMINATED]
+ST-0245-U    VIL_~_~_~         HELEN            BIO_ENGINEER   [TRANSFERRED]
+ST-0246-U    VILLENEUVE        ^%^%^%^%         LAB_TECH       [0x00_NULL]
+ST-0381-U    ...._....         MARCUS           LOG_ANALYST    [PURGED]
+ST-0382-U    BRADLEY           _ _ _ _          DATA_LOGISTICS [TRANSFERRED]
+ST-0419-U    CHENG             LIANG            MONITOR_LEAD   [INTACT]
+ST-0420-U    CH_#_#_#_         ANNA             FLOOR_MONITOR  [TERMINATED]
+ST-0421-U    PATEL             DEV              FLOOR_MONITOR  [TERMINATED]
+ST-0422-U    O'CONNOR          ..........       POD_ASSISTANT  [PURGED]
+ST-0522-U    GARR_#_#_         DA_o_o           TECH_OFFICER   [TERMINATED]
+ST-0523-U    GARRISON          ROBERT           MAINT_ENG      [0x00_NULL]
+ST-0601-U    BARK_~_~_         _~_~_~_~         FAC_SECURITY   [0x00_NULL]
+ST-0602-U    BARKLEY           JAMES            SEC_GUARD      [PURGED]
+ST-0603-U    VANCE             ????????         SEC_GUARD      [PURGED]
+ST-0774-U    MENDOZA           0xFF_0xFF        NEURO_DESIGN   [TRANSFERRED]
+ST-0775-U    MEND_o_o_         CLARA            NEURO_ASST     [TRANSFERRED]
+ST-0812-U    _ _ _ _ _         SARAH            OPERATIONS     [PURGED]
+ST-0813-U    GALLAGHER         0x00_0x00        SUPPLY_CLERK   [0x00_NULL]
+ST-0903-U    _o_o_o_o_         DAVID            SYS_ADMIN      [0x00_NULL]
+ST-0904-U    HARDY             ..........       NET_ENGINEER   [TRANSFERRED]
+
+====================== DATA STREAM SEGMENT FAULT ========================
+0000A120: 45 52 52 4F 52 3A 20 4D 45 4D 4F 52 59 20 43 4F  *ERROR: MEMORY CO*
+0000A130: 52 52 55 50 54 49 4F 4E 20 44 45 54 45 43 54 45  *RRUPTION DETECTE*
+0000A140: 44 20 49 4E 20 53 45 43 54 4F 52 20 31 35 0A 00  *D IN SECTOR 15..*
+=========================================================================
+
+[STAFF_ID]   [SURNAME]         [FIRST_NAME]     [ROLE]         [STATUS]
+-------------------------------------------------------------------------
+ST-1102-U    ZHANG             YI               HEART_MONITOR  [TERMINATED]
+ST-1103-U    ZH_~_~_~_         ~_~_~_~_         INCUBATION_TECH[TERMINATED]
+ST-1145-U    _ _ _ _ _         VICTOR           RECON_OFFICER  [PURGED]
+ST-1201-U    FISCHER           LINDA            INCUBATION_DIR [INTACT]
+ST-1202-U    FIS_?_?_?         MARK             LAB_HAND       [0x00_NULL]
+
+[... ERROR: TRUNCATED SERIAL STREAM ...]
+[... 118 ADDITIONAL RECORDS UNREADABLE DUE TO SECTOR BURNOUT ...]
+==== FILE END:UNABLE TO READ ====`
+</pre>
+[[Back|Desktop]] 
+
+
+:: Run Through the Random Door Behind Her {"position":"1100,650","size":"100,100"}
+You run as fast as you can and barge through several rooms, finaly emerging in a office.
+A man looks up at you from a desk and asks you what you want.
+
+* [[To find his manager]]
+* [[To find the nearest water dispenser]]
+* [[None of your buissness]]
+
+
+
+:: Scene 2 {"position":"900,750","size":"100,100"}
+You have obtained your ID card! 
+[[Cool!|Scene3]]
+(set: $inventory to $inventory + (a: "ID Card"))
+
+
+:: Scene1 {"position":"1025,475","size":"100,100"}
+You arrive in a large reception area.
+
+* [[Talk To Receptionist]]
+* [[Run Through the Random Door Behind Her]]
+(if: $talkedToDeskGuy is true)[
+  The water dispenser is sitting in the corner.
+
+  (link: "Drink water")[
+    You pour yourself a cool glass of water. Refreshing!
+  ]
+]
+
+
+
+:: Scene1a {"position":"1500,800","size":"100,100"}
+As you leave, the man clicks a small button below his desk.
+'click'
+You slowly turn around to see five men with guns pointing directly at your head.
+(after:3s)[(goto:"Dead")]
+
+
+:: Scene3 {"position":"1075,825","size":"100,100"}
+The receptioninst leads you through a door at the back and shows you to your desk.
+[[Sit Down|desk1]]
+
+
+:: Staff Chat {"position":"1125,1300","size":"100,100"}
+<pre>
+================================================================================
+ UNIFIED STAFF CHAT v2.1 // SECTOR 105 DIRECT CHANNEL
+ Connected to Node: 105 LOGISTICS
+ Status: ONLINE
+================================================================================
+</pre>
+
+<div style="border: 1px solid #444; padding: 10px; background-color: #111; font-family: monospace;">
+  <p><b style="color: #00ffff;">[10:14] Sector Lead (Marcus):</b> Hey $playerName, I'm trying to authorize this terminal upgrade, but IT locked the directory.</p>
+  <p><b style="color: #00ffff;">[10:15] Sector Lead (Marcus):</b> Do you remember the name of that former Senior Systems Architect who used to manage Node 105? If you give me their name, I can look up their admin bypass key.</p>
+</div>
+
+<br>
+
+(if: $hasOverrideCode is true)[
+  <div style="border: 1px solid #444; padding: 10px; background-color: #111; font-family: monospace;">
+    <p><b style="color: #55ff55;">[10:16] $playerName:</b> It was CHENG LIANG.</p>
+    <p><b style="color: #00ffff;">[10:17] Sector Lead (Marcus):</b> Perfect! That worked. Here is the override code he left behind: <span style="color: #00ff00; font-weight: bold;">7492-USE</span></p>
+  </div>
+](else:)[
+  |chatExchange>[
+    <b>Who do you tell Marcus?</b><br><br>
+    * (link: "Reply: 'CHENG LIANG'")[
+        (set: $hasOverrideCode to true)
+        (replace: ?chatExchange)[
+          <div style="border: 1px solid #444; padding: 10px; background-color: #111; font-family: monospace;">
+            <p><b style="color: #55ff55;">[10:16] $playerName:</b> It was CHENG LIANG.</p>
+            <p><b style="color: #00ffff;">[10:17] Sector Lead (Marcus):</b> Perfect! That worked. Here is the override code he left behind: <span style="color: #00ff00; font-weight: bold;">7492-USE</span></p>
+          </div>
+        ]
+      ]
+    * (link: "Reply: 'SARAH VANCE'")[
+        (replace: ?chatExchange)[
+          <div style="border: 1px solid #444; padding: 10px; background-color: #111; font-family: monospace;">
+            <p><b style="color: #55ff55;">[10:16] $playerName:</b> I think it was SARAH VANCE.</p>
+            <p><b style="color: #00ffff;">[10:17] Sector Lead (Marcus):</b> No, Vance was in Communications. That name didn't work for the systems archive key.</p>
+          </div>
+        ]
+      ]
+  ]
+]
+
+<br><br>
+
+[[Return to Desktop|Desktop]]
+
+
+:: Start {"position":"825,200","size":"100,100"}
+<pre style="font-family: monospace; line-height: 1; letter-spacing: 0;">`
+  .-----------------.
+  | [FILE]          |
+  |                 |
+  | > ON PAPER      |
+  | > GAMES         |
+  |                 |
+  |                 |
+  |                 |
+  |                 |
+  |                 |
+  |                 |\
+  |                 | \
+  '-----------------+--'
+
+   O N   P A P E R   G A M E S
+`</pre>
+
+<h1>Files 005</h1>
+
+(text-colour:red)[WARNING!
+
+THIS GAME IS UNFINISHED AND IS STILL IN BETA, AND THEREFORE GAMEPLAY COULD BE BUGGED.]
+
+
+[[Enter?|Loading]]
+[[Exit?]]
+[[About]]
+
+(text-size: 0.8)[© On Paper Games 2026. All rights reserved.]
+
+
+:: Talk To Receptionist {"position":"850,550","size":"100,100"}
+{(if: (datatype: $playerName) is not string)[
+  (set: $playerName to (string: $playerName))
+]}
+
+(if: $talkedToDeskGuy2 is true)[
+  (if: $playerName is "" or $playerName is "0")[
+    (set: $playerName to "Recruit")
+  ]
+
+  You: "Can I see the manager?"
+
+  Receptionist: "Sure, just wait a few seconds!"
+
+  ''10 SECONDS LATER''
+
+  Manager: "Right, what do you want?"
+
+  * [[Ask about facility security|Manager Security]]
+  * [[Ask where your desk is|Manager Desk]]
+  * [[Say you're lost|Manager Lost]]
+](else:)[
+  You: "Erm hi! I just got a new job here and I have no idea where I'm supposed to be right now."
+
+  Receptionist: "New recruit? I'll print up your ID card real quick! Just, what's your name again?"
+
+  (input: bind $playerName, "")
+
+  <br><br>
+
+  |msg>[]
+
+  <br>
+
+  |submitLink>[
+    (link: "Hand over your details")[
+      (set: $playerName to (string: $playerName))
+      (if: $playerName is "" or $playerName is " ")[
+        (replace: ?msg)[<span style="color: #ff5555;">Receptionist: "I'll need an actual name for the badge!"</span>]
+        (rerun: ?submitLink)
+      ](else:)[
+        (goto: "Scene 2")
+      ]
+    ]
+  ]
+]
+
+
+:: To find his manager {"position":"1300,425","size":"100,100"}
+The man says to speak to the receptionist.
+(set: $talkedToDeskGuy2 to true)
+[[Go To Reception|Scene1]] 
+
+
+:: To find the nearest water dispenser {"position":"1525,675","size":"100,100"}
+Its right where you came from. When you come into the reception area you just make a left and there it is. NOW GET OUT AND DONT WASTE MY TIME!
+
+[[Go To Reception|Scene1]]
+(set: $talkedToDeskGuy to true)
+
+
+:: Trapdoor Opened {"position":"775,1525","size":"100,100"}
+Alarms blare and you realise you made a huge mistake.
+$playerName: "Oh flip. I JUST GOT THIS JOB!I'll get fired if I stay here, but if I'm gone, they will never know it's me.
+I'll just stay down that hatch that just opened and I'll be fine!
+Here goes nothing!"
+(align:"=><=")+(box:"X=")[(text-colour:blue)[''YOU JUMP DOWN THE HATCH AND THE TRAPDOOR CLOSES ABOVE YOU'']]
+
+[[Continue|maze1]]
+
+
+:: Trapdoor Terminal {"position":"1200,950","size":"100,100"}
+(set: $cmd to "")
+(set: $userInput to "")
+<pre>
+================================================================================
+  _    _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+
+ | |  | | |  ___|  |  ___|     |  TERMINAL CONSOLE v4.02
+ | |  | | | |__    | |__       |  --------------------------------------
+ | |  | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE_105
+ | `--' | .---|  | | |___      |  REGISTRATION INDEX:   105_OF_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION_105
+================================================================================
+</pre>
+
+Type 'help' to view available terminal commands.
+
+<br>
+
+|consoleDisplay>[
+  <span style="color: #00ff00;">NODE&#95;105@USE-SYS:~$ Ready for input...</span>
+]
+
+<br><br>
+
+Command Input: (input: bind $userInput, "")
+
+|execButton>[
+  (link: "Execute Command")[
+    (set: $cmd to (lowercase: $userInput))
+    (if: $cmd is "help")[
+      (replace: ?consoleDisplay)[
+        <span style="color: #00ffff;">
+        AVAILABLE COMMANDS:<br>
+        - ls : List directory files<br>
+        - cat [file] : Read file contents<br>
+        - clear : Clear terminal display
+        </span>
+      ]
+    ](else-if: $cmd is "ls")[
+      (replace: ?consoleDisplay)[
+        Introduction&#95;Booklet.pdf<br>
+        (if: $trashRestored is true)[recovered&#95;file.txt<br>]
+      ]
+    ](else-if: $cmd contains "cat" and ($cmd contains "booklet" or $cmd contains "pdf"))[
+      (replace: ?consoleDisplay)[
+        <span style="color: #ff5555;">cat: Introduction&#95;Booklet.pdf: Cannot display binary file in terminal stdout</span>
+      ]
+    ](else-if: $cmd contains "cat" and $cmd contains "recovered")[
+      (if: $trashRestored is true)[
+        (replace: ?consoleDisplay)[<pre>-FILE: 10922-
+COMPANY=UNIFIED SYSTEMS ENGINEERING
+TYPE=STAFF&#95;DIRECTORY
+COMPUTERNO.327
+==== STAFF&#95;DIRECTORY ====
+Database&#95;Status: CORRUPTED // PARTIAL&#95;RECOVERY&#95;SECTORS&#95;01-14
+Recovery&#95;Action: FORCE&#95;PARSE&#95;PARTIAL&#95;STRINGS
+Total&#95;Human&#95;Records&#95;Detected: 152
+
+[STAFF&#95;ID]   [SURNAME]         [FIRST&#95;NAME]     [ROLE]         [STATUS]
+-------------------------------------------------------------------------
+ST-0104-U    SMITH             ARTHUR           DR&#95;DIRECTOR    [INTACT]
+ST-0105-U    SMI&#95;??&#95;??         ??&#95;??&#95;??         ASST&#95;DIR       [PURGED]
+ST-0112-U    KOWALSKI          0xFF&#95;0xFF        SR&#95;GENETICIST  [TERMINATED]
+ST-0113-U    K&#95;o&#95;o&#95;o&#95;o         ELLEN            JR&#95;GENETICIST  [TRANSFERRED]
+ST-0114-U    0x00&#95;0x00         THOMAS           CLONE&#95;MONITOR  [TERMINATED]
+ST-0245-U    VIL&#95;~&#95;~&#95;~         HELEN            BIO&#95;ENGINEER   [TRANSFERRED]
+ST-0246-U    VILLENEUVE        ^%^%^%^%         LAB&#95;TECH       [0x00&#95;NULL]
+ST-0381-U    ....&#95;....         MARCUS           LOG&#95;ANALYST    [PURGED]
+ST-0382-U    BRADLEY           &#95; &#95; &#95; &#95;         DATA&#95;LOGISTICS [TRANSFERRED]
+ST-0419-U    CHENG             LIANG            MONITOR&#95;LEAD   [INTACT]
+ST-0420-U    CH&#95;#&#95;#&#95;#&#95;         ANNA             FLOOR&#95;MONITOR  [TERMINATED]
+ST-0421-U    PATEL             DEV              FLOOR&#95;MONITOR  [TERMINATED]
+ST-0422-U    O'CONNOR          ..........       POD&#95;ASSISTANT  [PURGED]
+ST-0522-U    GARR&#95;#&#95;#&#95;         DA&#95;o&#95;o           TECH&#95;OFFICER   [TERMINATED]
+ST-0523-U    GARRISON          ROBERT           MAINT&#95;ENG      [0x00&#95;NULL]
+ST-0601-U    BARK&#95;~&#95;~&#95;         &#95;~&#95;~&#95;~&#95;~         FAC&#95;SECURITY   [0x00&#95;NULL]
+ST-0602-U    BARKLEY           JAMES            SEC&#95;GUARD      [PURGED]
+ST-0603-U    VANCE             ????????         SEC&#95;GUARD      [PURGED]
+ST-0774-U    MENDOZA           0xFF&#95;0xFF        NEURO&#95;DESIGN   [TRANSFERRED]
+ST-0775-U    MEND&#95;o&#95;o&#95;         CLARA            NEURO&#95;ASST     [TRANSFERRED]
+ST-0812-U    &#95; &#95; &#95; &#95; &#95;         SARAH            OPERATIONS     [PURGED]
+ST-0813-U    GALLAGHER         0x00&#95;0x00        SUPPLY&#95;CLERK   [0x00&#95;NULL]
+ST-0903-U    &#95;o&#95;o&#95;o&#95;o&#95;         DAVID            SYS&#95;ADMIN      [0x00&#95;NULL]
+ST-0904-U    HARDY             ..........       NET&#95;ENGINEER   [TRANSFERRED]
+
+====================== DATA STREAM SEGMENT FAULT ========================
+0000A120: 45 52 52 4F 52 3A 20 4D 45 4D 4F 52 59 20 43 4F  *ERROR: MEMORY CO*
+0000A130: 52 52 55 50 54 49 4F 4E 20 44 45 54 45 43 54 45  *RRUPTION DETECTE*
+0000A140: 44 20 49 4E 20 53 45 43 54 4F 52 20 31 35 0A 00  *D IN SECTOR 15..*
+=========================================================================
+
+[STAFF&#95;ID]   [SURNAME]         [FIRST&#95;NAME]     [ROLE]         [STATUS]
+-------------------------------------------------------------------------
+ST-1102-U    ZHANG             YI               HEART&#95;MONITOR  [TERMINATED]
+ST-1103-U    ZH&#95;~&#95;~&#95;~&#95;         ~&#95;~&#95;~&#95;~         INCUBATION&#95;TECH[TERMINATED]
+ST-1145-U    &#95; &#95; &#95; &#95; &#95;         VICTOR           RECON&#95;OFFICER  [PURGED]
+ST-1201-U    FISCHER           LINDA            INCUBATION&#95;DIR [INTACT]
+ST-1202-U    FIS&#95;?&#95;?&#95;?         MARK             LAB&#95;HAND       [0x00&#95;NULL]
+
+[... ERROR: TRUNCATED SERIAL STREAM ...]
+[... 118 ADDITIONAL RECORDS UNREADABLE DUE TO SECTOR BURNOUT ...]
+==== FILE END:UNABLE TO READ ====</pre>]
+      ](else:)[
+        (replace: ?consoleDisplay)[
+          <span style="color: #ff5555;">cat: recovered&#95;file.txt: No such file or directory</span>
+        ]
+      ]
+    ](else-if: $cmd is "clear")[
+      (replace: ?consoleDisplay)[<span style="color: #00ff00;">NODE&#95;105@USE-SYS:~$ Terminal cleared.</span>]
+    ](else-if: $cmd is "sys_init --port 8080 --bypass-auth --exec trapdoor_open" or $cmd is "sys-init --port 8080 --bypass-auth --exec trapdoor-open")[
+      (if: $hasCodePart1 and $hasCodePart2 and $hasCodePart3)[
+        (goto: "Trapdoor Opened")
+      ](else:)[
+        (replace: ?consoleDisplay)[<span style="color: #ff5555;">ERROR: Command authorization missing. Collect all code fragments first!</span>]
+      ]
+    ](else:)[
+      (replace: ?consoleDisplay)[<span style="color: #ff5555;">bash: command not found</span>]
+    ]
+    (rerun: ?execButton)
+  ]
+]
+
+<br><br>
+
+[[Return to Desktop|Desktop]]
+
+
+:: Trash {"position":"1250,1225","size":"100,100"}
+(set: _file to "")
+(if: $trashRestored is true)[
+  The Recycle Bin is empty.
+](else:)[
+  Found deleted file:
+  - recovered_file.txt
+
+  (link: "♻️ Restore recovered_file.txt")[
+    (set: $trashRestored to true)
+    (replace: ?status)[File restored to File Explorer!]
+  ]
+]
+
+[ ]<status|
+
+-------------------------------------------------------------------
+[[Back|Desktop]]
+
+
+:: Want the code? {"position":"300,300","size":"100,100"}
+<a href="Tm9wZS4gSSBhbSBub3QgcHV0dGluZyBhIGdhbWUgaW4gaGVyZSBiZWNhdXNlIG15IFBDIGNvdWxkbid0IGhhbmRsZSBpdC4gWW91IG1heSBoYXZlIHRoZSBob25vdXJzIG9mIGRvaW5nIGl0IHlvdXJzZWxmLg==" download="Files005_Source.twee">
+  <button>Get the Code (.twee)</button>
+</a>
+
+
+:: box1 {"position":"750,1900","size":"100,100"}
+<h1> ENTER THE CODE TO OPEN THE BOX </h1>
+(set: $enteredCode to "")
+
+Enter the access code:
+
+(input-box: bind $enteredCode, "X", 1)
+
+(link: "Submit")[
+  (if: (lowercase: $enteredCode) is "4829")[
+    You open the box and discover a battery!
+    (set: $inventory to $inventory + (a: "Battery"))
+  [[Cool!|maze12]] 
+  ](else:)[
+    Invalid code. Try again.
+  ]
+]
+[[Back|maze12]] 
+
+
+:: cupboard1 {"position":"1975,1425","size":"100,100"}
+Inside the cupboard, you see a torch resting on the shelf.
+[[Take Torch|cupboard2]]
+[[Back|door5]] 
+
+
+:: cupboard2 {"position":"2175,1250","size":"100,100"}
+You have found a torch!
+{(set: $inventory to $inventory + (a: "Torch"))}
+[[Cool|platform1]]
+
+
+:: desk1 {"position":"1025,950","size":"100,100"}
+You are at your desk.
+[[Login To Your Computer|pclogin]]
+[[Open Your Draw|draw]]
+
+
+
+:: desk2 {"position":"1575,325","size":"100,100"}
+You reach a metal desk with an old computer, connected with wires to something in the distance.
+
+$playerName: "Is that...?"
+
+Robert: "Yep. A cloning chamber."
+
+Thomas: "I remember when I worked near one of these. It wasn't this one, though. Mine was newer."
+
+Thomas: "I was a clone monitor. I would sit at a desk just like this and record the clone's vitals."
+
+Linda: "Those were the good old days."
+
+$playerName: "Are we doing the computer login or what?"
+
+Robert: "Thomas, you worked at one of these computers—tell the kid what to do."
+
+Thomas: "Right, $playerName, you just turn it on and insert your ID."
+
+[[Sit Down|intro]]
+
+
+:: door1 {"position":"1650,1050","size":"100,100"}
+You try to go through this door but the tunnel behind it has collapsed.
+[[Okay|platform1]] 
+
+
+:: door2 {"position":"1850,975","size":"100,100"}
+(if: $spiderKilled is true)[
+  There is a mouldy sandwitch and a small smudge.
+  $playerName: "Wow. wonder what that smudge could be."
+](else:)[
+ There is a mouldy sandwitch and a spider.
+ [[Kill spider|spider1]]
+] 
+[[Back|platform1]] 
+
+
+:: door3 {"position":"1975,925","size":"100,100"}
+You find a skeleton.
+$playerName: "Creepy"
+[[Back|platform1]] 
+
+
+
+:: door4 {"position":"2100,975","size":"100,100"}
+There is a narrow tunnel leading down and another tunnel leading right.
+[[Go Right|jumpscare1]]
+[[Go Down|tunnel1]]
+[[Back|platform1]] 
+
+
+
+:: door5 {"position":"2025,1225","size":"100,100"}
+This would appear to be a janitors cupboard.
+[[Search|cupboard1]]
+[[Back|platform1]] 
+
+
+:: draw {"position":"700,1075","size":"100,100"}
+There are 2 items.
+There is a stickey-note.
+It reads:  Computer Password=1111
+There is also a small box  that says (text-colour:yellow)[OVERIDE] and has a keypad on it.
+Enter Code: (input: bind $enteredCode, "")
+
+(link: "Submit")[
+  (if: $enteredCode is "7492-USE")[
+    (goto: "Access Granted")
+  ](else:)[
+    (replace: ?error)[<span style="color: red;">Invalid Code!</span>]
+  ]
+]
+
+|error>[]
+[[Okay|desk1]] 
+
+
+:: intro {"position":"1750,375","size":"100,100"}
+<pre style="font-family: monospace; line-height: 1; letter-spacing: 0;">`
+   .-----------------.
+  | [FILE]          |
+  |                 |
+  | > ON PAPER      |
+  | > GAMES         |
+  |                 |
+  |                 |
+  |                 |
+  |                 |
+  |                 |
+  |                 |\
+  |                 | \
+  '-----------------+--'
+O N   P A P E R   G A M E S   P R E S E N T S:
+`</pre>
+(after: 2s)[(goto: "intro2")]
+
+
+:: intro2 {"position":"1750,275","size":"100,100"}
+(align:"=><=")+(box:"X=")[<h1>Files 005</h1>]
+(after: 2s)[(goto: "intro3")]
+
+
+
+:: intro3 {"position":"1750,175","size":"100,100"}
+(align:"=><=")+(box:"X=")[<h1>Files 005</h1>]
+(align:"=><=")+(box:"X=")[<h3>(text-colour:orange)[Test Playthrough]</h3>]
+(align:"=><=")+(box:"X=")[If you enjoyed this test playthrough, please tell me how you rate it. You can report any bugs to me, too, and I'll try to fix them right away.]
+
+[[Back To Start|Start]] 
+
+
+:: jumpscare1 {"position":"1950,800","size":"100,100"}
+(after: 3s)[(goto: "door4")]
+<pre style="font-family: monospace; line-height: 1.0; letter-spacing: 0px; text-align: center;">
+......................................................:.............................................
+......................................................:.....:.......................................
+...............................................:...:..::...--.......................................
+...............................................:=-.:..+==:..:-:-:...................................
+........................:.........:-........:-=+-:--.=:=+=..-+==-:..................................
+...................................:......:=+##*-.--.-:=++:.=++=-:..........::......................
+...................................::....:+#@%%%=.-*=:=+##*.+**+=-..................................
+.................................:-::...:*%%@%#%*:=#*=::#@*+.=+--:::................................
+.................................::....-*##@@@%*#=*%%%+:-+*#+-:::-..................................
+......................................:=*+#%@%%@#-+%%#*=..-=---::..............:-:..................
+.....................................:-=+*-+*%@@@*::::..........:.............:.:...................
+.........................................:::-=%%%+..........:............:...:.::...................
+..............................................=##*=..:....+%%#+................::...................
+...................................=%@@%:.....-=+*=:....-%@@+@@+...............-:...................
+..................................-@#=%@#.....-=+=-:....:#@@@@#-..............-:....................
+...................................=#%%#:....:-=++-:::....::-................:::....................
+...........................................:--==+*+-:-:..........:..................................
+......................................::--::--=+#%*==#*=-.....::-:..................................
+.............................:.:.::.::-==-::::-+%%#*+****+-:.::::..:................................
+................................::::---:::...:-+%#*+=-===*#+:..::...................................
+.............................:::-----:::-...:-=*%%*#*=:---#@@+..:...................................
+.............................::-=--:::::::-::-=*@#+++=::::=++++-.:..................................
+...............................::::-===:::-:.:-+#*++++==:-+==+**-...................................
+...............................:::.:-:::-=--:--:-==*#***=-:-=*+++=-.................................
+.......................................::--==-+-+***##+==-:.:-:::--.................................
+.........................................:.:-===+**##=-::...........................................
+.............................................:--=+*+-......:.:.:::..................................
+....................................:--::--.:.....:.:::-::...:-=-:..................................
+....................................:-===++=-::+++-:-:--::-:--=--....:.:............................
+.....................................:-=*##*+=-=++====:---=-:--:...:--::............................
+......................................:--+=------++**#+=+=---:....-=--::............................
+......................................:--=-:::::-=*#%*++++++::.:-+++=-..............................
+..........................................::::::-===-=====-:..:=+==-:...............................
+......................................:...::....::::::::......-=-:..................................
+.....................................---..--:..:..........:::---:...................................
+</pre>
+
+<div id="audio-container"></div>
+
+<script>
+  // Insert audio directly to prevent Twine parser lag
+  var audio = document.createElement("audio");
+  audio.src = "data:audio/mp3;base64,//uUBAAMgesF0BjMMAAvoenCPSYUjbz1OG0wyRGgnygdhiBzBSDl2Aw4CCITJkz9AaY5yhmXeCBwo7nNggp//nP934nPuEAIHPygIAgCYPg+D4fBAEAQBABg+D4Pn3FHKSAAhJNLBDCkC4rDZG0CYXcRGRkZ733fggQcCAYyjqlHL///+j9b////y4Pg+aghjwCk27LyqpyR41IUPbKtpbif0DgkBAB51kEAhs8tdsXYqNAQoiGS0uCw+e6TRsbSSWnfsFeZmceZQ37FXG06tn5JG89azf1n8oyyOf/Wr+MdU5DQ+D7WL/wsVIlgq9QMnTEJkQ7IirisqKPYOCouQFNyXXjogf5FQOymNQwC5WSiQT2szDtnlq2TXJwxRzXPInrdjzXEVjjrK+A+1VVqVUy+0Z0tpHWvSir+1tftXamrBv/x+nJq0gxHoIzzi5U/t/pP4hnwka5SC48FDZf3Bd32ShS0Ir1MQU1FAwAJCAAEAAAAAAAAAAAAAAAAAAAA//uUBAAIkrFH0JsLGfRRaQpXPGVnir0hPueI15FYJCcNhhVqBUltwpgwIYQiRLnLh9jiRuO0VCerQpkPrp/wfZ3BZuhCoTnAT2w77Pf8yTLVuxgR2gKiRNI9W+2sQWM+xfO+a9CjQVS9SJsuf/+IcMAhyDwMHYluZpSAcFRxuCwxRSBmRle/SlrvV5b+4Ujlk/wWm6AkyEZRClBh1VHXMdfNS0pqoZHVRUoqKq2VNVmYRQx5m0+saIjkfqVqOv/ihxICnh9A4EUTGe7zAGSyULssYD6BZjKVgn4VpzqRECDXPzT5wrk9c7rG3e8aFuuFDlV4EqjUWpxLkNzA22TtRhDUIRTtgmYQRJLudWR3t6/oANnf1//4acwoHChAKJ9m0gAHIDTXMLAakhA7gjCEFZW6DSCqZ8CnGREZ0g79be2vNkzzuCLCH7AFKgrRVU5XQ3RW6dqEFCRBhApytGEYhPc511dG/+gcbO///+JTiAwBwYIAKX2dCYgpqKBgASEA//uUBAAAAqBIVFHiTexVaQqqPSU/iylHW1TygDljHWuqllAHAEakpNJOCU7gcsddxYOJ41IDpm0r9Xu1v8+u67138elG99YWcoqhFnEygb//Y6Enuh2VOpzka6Ean/Z1Y/oBlQAKOHA2amT/63htkpYTJ3qyA0QPAIa5JxtyDKmFxjt9a4NmoKORYjy5pzjUZx13Rm1FBtEsdVH0RYmKyh97/8cdCT3Q7KnOLh8UZXIRkT6dnUcf0D4qgCCoaJgGzUyf+izM6ioSAyf2LUAK1xTbal3WibO5fem5bSzb+dYO0XnVDXDxkFbRCwpTdmMrK3/mQXETucjsQWZ/flKUv/5la/nGBwg0QFQA7b53X15Ga6nZ3eQjKQjOJrYXQA5+YBhIAf8cWAK96Tbbl2XA0Zq74tVyq3tqDtF51QWOcDGICsKxCwpTdmMrK3/ujlO5yOxBZn9+UpW//Moqj6HFwoBCBYQFQA/Xvzb//8Ac2OXPgMgCpfRZB/7AMJDP7HRg//uUBAAAAqRS4e4VoAJUilw9wrQASqVFhVyBgBlUqLCrkDADAAYHA4GA4HA5HA4HA40mADtbUXI+XCa3jzCQCYLU/KA5DVNNvm5o11L/+eTdOup/9Ny+bus3//6BuTCUN1Gg5+j//l83RL7lxjclFtqf//83NA/NYABgcDgYDgcDkcDgcDjSYAO1tRcj5cJrePMJAJgtT8oDkNU02+bmjXUv/55N066n/03L5u6zf//oG5MJQ3UaDn6P/+XzdEvuXGNyUW2p///zc0D81gAACABJTlcMhRTzGtxliDCizpVMjo4uCSU3e/me9r5SFlERQAiqFw+u83aRJBvhcnwi4V9Q5HVYn5G/ctPjSxbCo16wdQdLYcan+QGdaEBGXFMQFN0AAAQAJKcrhkKKeY1uMsQYUWdKpkdHFwSSm738z3tfKQsoiKAEVQuH13m7SJIN8Lk+EXCvqHI6rE/I37lp8aWLYVGvWDqDpbDjU/yAzrQgIy4piApukxBTUUDAAkIA//uUBAAAAqlNYNBmGyZVKawaDMNkymUBj0MM2TlHIDHoYZsnCgAAAApJ90EUMHcM0r8QWUqMqDTSZgrcKBBSzsOGhERrS4kC2M/nSydrZSyXnRbAphuWaoEZGB7XZYehaUjjmqz4URiUi0WyfdZhyd2Nyww78BcWzIUAAAAFJPugihg7hmlfiCylRlQaaTMFbhQIKWdhw0IiNaXEgWxn86WTtbKWS86LYFMNyzVAjIwPa7LD0LSkcc1WfCiMSkWi2T7rMOTuxuWGHfgLi2Zt6gokgkE28Hit2GpN4drfvWXtCAqPR+aZH3agrIH35ohSBx1z4fnCHFkJ4RZchPaFOehTc/pP3P+Fxt4xkeikMabNymdJ84K4/6Kn9w+OQzdlVPb1BRIBIJt4PFbsNSbw7W/esvaEBUej80yPu1BWQPvzn8c1z4fnCHFkJ4RZchPaFOehTc/pP3P+Fxt4xkeikMabNymdJ84K5/0VN9w+OQzdlVOmIKaigYAEhAACAAAA//uUBAAAAo9NY2hmGk5Vp9yNGEPBywi3faWYcslko/A0NI4JiSTaIJAAIBotzJ5ttsaGiYOykucIhYqLFgqHZlxQT7+ePrJ+0PNnG9EWchYIXZT0FzzI9uf3N1I/6zqVLJELETTO3hW/tnOi7TDFR+N0NyL0Z1NutEJEkkk4LvcuvXpMhqoyK9JdjMNKmJaYHNrt81pEB59zjsrJ8YEZGwsSeiLK0Lh2U9Bc8/258BobqrFOsLEpVhIhYiJN1sCP8e8t8CTfTq3DeUl6gQgQAACUm6oge6dTV4Os3H1ed5zMREAlIMQEDFR66DCPabselH+0UUebRxPoEJm6VgJSDFs6oyH9YD6Ov6fOfW+la2FvIuZ/bSZ6o2ooHjq4Ahe+eHl/YzCLCIABSbloIIK9iUeCU2cHvuI6YwCMOgUYGTPSBNxdw46ebIDBC1hUOTGTNaVgJSDFs6oyH9YD6OZ5G+9PLPrW0oZelLK/mcNj1bqmqGCBgrogbdPhiXewmIKa//uUBAAAAqdL39ECHrJUSXwKGEPYSvE9g6MEcglgp7B0YI5BaGUAAEpuVGJmT7mEZV0XJmjTgUGEHvJQVH0KWXmI5NU1EKnSmxsZZ4mWru2onvcyFWtSHaV3vIF2IAMw+xJW+SLQpN9pHnyKe3bScuah1MjYrzuPLPLUAAUW3dGkX6eu0VM+J5r5NABAxO3OGr5mn9CLnMrDEY+SNaSE1kHZDu7aie9zIVXPUh2ld7yBdiADX2arfIVQrG6s99L5HnA5KrKHUSHYrizTy0kaqIBASSc0MMlgS5+TICptrUvVJBJxQBNYYAICElDsVBvWaBoWWecK6bwNc6auZzOZfkRfb8Ns5kXTK0TmUzIZyZDLMraSmkOwuk7O+ZhCMyCQg3Tf6NSRqogEBJJzQwyWBLn5MgKm2tS9UkEnFAE1hgAgISUOxUG9ZoGhTY75XTeBrnTVzOZzL8iL7fhtnMi6ZWicymZDOTIZZlbSU0h1C6ThndjMIRmQSEG6b/RpMQU0//uUBAAAArBL4GkBH6BWCXwNICP0Cu0zi0CYaBFdpnFoEw0CZipSAABBSd7sPQakQspVQ6iv0OF0LNi5pqNDogM6D7iz+hgv1N3/HVU9/cGClJz/08DLVy0ajEzFmFKRR88SxmWigSskbrDmKMK2UtEAALkGthIMeilmKlIAAEFJ3uw9BqRCylVDqK/Q4XQs2Lmmo0OiAzoPuLP6GC/U3f8dVT39wYKUnP/TwMtXLRqMTMWYUpFHzxLGZaKBKyRusOYowrZS0QAAuQa2Egx6KWp6YCRKblRDC0OzFX7IZRmChCROZnSCDNBM2DAmgV6YmHP/ZD3PEgBtmf/btm3nZNayEMYwKuMU5LDbXqHGlJy4kGO4ZaWQtx1xxe1HrjIETYXuef6Ssm1PTASJTcqIYWh2Yq/ZDKMwUISJzM6QQZoJmwYE0CvTEw5/7Ie54kANsz/7ds287JrWQhjGBVxinJYba9Q40pOXEgx3DLSyFuOuOL2o9cZAibC9zz/SVk0w//uUBAAAAqFN4mhoHUJUKbxNDQOoSvkZhaGgc0lfIzC0NA5plTMrCITckvzOw9QjPKuxMh6OjaovOHmQ27qegyZX4m70W629u+xlh3CIjWk82xpIZ1blCOnSrG4VT90/P8ihLxDzy3+M55mISKkFLknEMELeepmHSpmVhEJuSX5nYeoRnlXYmQ9HRtUXnDzIbd1PQZMr8Td6Ldbe3fYyw7hERrSebY0kM6tyhHTpVjcKp+6fn+RQl4h55b/Gc8zEJFSClyTiGCFvPUzDm2rWggElI5rFEgavWcYFNThSVi3Gz3RFgwkaF0FlszGG28/VjRn1c28OtkHoeKlGasiRRGCNlE06tI8zr5y9kXNkM/707CnyGRll+Vw6Uawfz5WvgjFa5G2rWggElI5rFEgavWcYFNThSVi3Gz3RFgwkaF0FlszGG28/VjRn1c28OtkHoeKlGasiRRGCNlE06tI8zr5y9kXNkM/707CnyGRll+Vw6Uawfz5WvgjFa5ExBTUU//uUBAAAAptJ4tBpHKRTaTxaDSOUiuUng0QJOxFcpPBogSdi6rpURJJuQKwM3jr0XwzzPOrwsYtWe+oOPqiEUoFESgZUURHZw218gfXZ84yH5GvrMpe/m0sVqQssiHEPfiL73v56fzz+U0DiBYlXhBj3coGiABK9V0qIkk3IFYGbx16L4Z5nnV4WMWrPfUHH1RCKUCiJQMqKIjs4ba+QPrs+cZD8jX1mUvfzaWK1IWWRDiHvxF97389P55/KaBxAsSrwgx7uUDRAAla2mABJJSkEUQFY1Xp1WpXe/h6paRbeG4BuE4jHjhOhdxMVTDDouFvR+QzqAHJOPTXY92vJbuhDkDZjMFyGdsZWff1/bRFMRBluWuWceBx7YqVFwuWd/ytbTAAkkpSCKICsar06rUrvfw9UtItvDcA3CcRjxwnQu4mKphh0XC3o/IZ1ADknHprse7Xkt3QhyBsxmC5DO2MrPv6/toimIgy3LXLOPA49sVKi4XLO/5VMQU1FAAAA//uUBAAAAqJR4NDDFcRUSjwaGGK4iyEVjaMIeJFkIrG0YQ8SVZ4AAIop31UXlt5p6ROlD7aKWuz1pbmdEEVZB0cuWZEkvLRRr4YnPKKQJYiGWY54NiwTRMq9tt1MCZU7sdG3IQ95H+cvZiIBOORxYbOv850wZcv6lWeAACKKd9VF5beaekTpQ+2ilrs9aW5nRBFWQdHLlmRJLy0Ua+GJzyikCWIhlmOeDYsE0TKvbbdTAmVO7HRtyEPeR/nL2YiATjkcWGzr/OdMGXL+puRxtIhJpuS6YaxvQuo6VbXgyrOY4q9w1M6mkxoGotz2fRkYW1pCFJvX7yg2I8q2KF/5sokieLubuHEiworjKlpFhQJ1Xm4/BFtzNVB1JgoDwkCPgNjRf7K25HG0iEmm5LphrG9C6jpVteDKs5jir3DUzqaTGgai3PZ9GRhbWkIUm9fvKDYjyrYoX/myiSJ4u5u4cSLCiuMqWkWFAnVebj8EW3M1UHUmCgPCQI+A2NF/srTA//uUBAAAAp5LYejDNsJTyWw9GGbYSvEZh6GYcMljpbD0Mw4Zrc2qJAEjkn9RlN5yMifkb5Z4x6jy3m2JiQNIK/7f/FMitvqE9XmZ/xuky1GL7UBicpwssyR3FsE8U3O0vn8tPXh/Jcs15viSH6KThy4dhJhvNVWStzaokASOSf1GU3nIyJ+RvlnjHqPLebYmJA0gr/t/8UyK2+oT1eZn/G6TLUYvtQGJynCyzJHcWwTxTc7S+fy09eH8lyzXm+JIfopOHLh2EmG81VZG7XCiyIrJbvFH0RRzPP4ph3mrE12726DByRocgGWe1RethOeiMrrEPng1DwwTvSq5zOSK0FEJh59GyHZA4g4pbuRayoWfMizEKRl5rh0PwamKJrn82YMmbtcKLIjslu8UfRFHM8/imHeasTXbvboMHJGhyAZZ7VF4mxXbzBK+ESFPBqHhgnelVzmckVoKITDz6NkOyBxBxS3ci1lQs+ZFmIUjLzXBkvxbBpRNc/mzBkyYgpqK//uUBAAAApoy5GjFHDRSplyNICPwyq1Bh0GYclFlKDA0NI6IUacaSISbbk7NYe4dmdpOzWmWTyrNfJmdR4TDiMJndaiUjhnj5ojQiPyTOi+5O2RmpGfZlnT02BqABPU1rnrPCUMDnhpQELm/MAiHnOAcq8aJfUUVakaSIKbbk8QeF3SYIJhSquFWD65qu/T2uR41Op/lEmrjQRz02mO6v6TuT+enamwpuZVZvTYGqCP/L3c/p1Ygo9TQyek/f5+AjnOZ/F7ou//+Yf9SiASkm7CEmop0iQEHFnWUxL/SkumTnQpj2AqV6VKoSuTEud0s+M5CUod2SsRkCJCJMukWcthtUbPjEeyH9qaxIR8L+AkqcJjz/+KW8iGoRdHF94fjcTYAAAKbl8ITqKdIiAg4s6ymJe9JQbQXGYJSI0hUnkduNlUJXSlZCbi3h5CUodzlYjIEoARJSlIs5bDFVGz4xGbIf2lrEhHwv/Ldqixz/vqW8gg1CLo6+TTEFNRQAAAA//uUBAAAApJF4VDBHiRVBww6DMOSixE3h6MEehliJvD0YI9DualQAEpJwykEZptnMvKb5kn1zGitgpKuHY9A0gp9fKANe0gB9sjQo0gVZUQfZ3Mn5XQ2awCUr8rlsuD/XRij8Lvw6WWuOD5mDBdqyACQHRDd+y9qVACkknAjCFEtDUicmmRK7YSddikq4dj0FACp0jQDLLzIYJVXVzBUgJ3JQkI2jkT7O5leV02awMpX+uWy4OVKBwRqc2PCRxw8PPUCIXiyHllHUfqbRcSBACKSUsJqEP2lArw2R7xmQ2F7fuf4StIkfUZvuOZL0tPf04KHgdWT87LM/Ly+LUu9ozkWSibYRq6s3nRfzz3Jz5YfcccH9oArsxpQks9Ragz7I6fmybRcSBACKSUsJqEP2lArw2R7xmQ2F7fuf4StIkfUZvuOZL0tPf04KHgdWT87LM/Ly+LUu9ozkWSibYRq6s3nRfzz3Jz5YfcccH9oArsxpQks9Ragz7I6fmyTEFNA//uUBAAAApQ74lBGGLRSh3xKCMMWiy03fOGkbxFlpu+cNI3imnYQEpJN2QfO202LPqA6y5g9w5zpuwwNXCmKLOHZkxcItzGY6R6kc+jIbjEsYmYu9J0h3gUo0il1v5PRWig4lAYGAAwmacFSUuoSuedyEf9x6emnYQEpJN2QfO202LPqA6y5g9w5zpuwwNXCmKLOHZkxcItzGY6R6kc+jIbjEsYmYu9J0h3gUo0il1v5PRWig4lAYGAAwmacFSUuoSuedyEf9x6etgAACSo1eDQd4mHZmbEcCBVt9VlgakwgoTWSCMyeMRi1PiF2a0qzvWyvFZTXIzzLLhZBhjVtrM+6pyONpZT4ax26en1q5XVrz9VDFnE7hA2gmqYTcAfvMoJWwAABJUavBoO8TDszNiOBAq2+qywNSYQUJrJBGZPGIxanxC7NaVZ3rZXisprkZ5llwsgwxq21mfdU5HG0sp8NY7dPT61crq15+qhizidwgbQTVMJuAP3mUEkxBTUU//uUBAAAAqlI4+jFHERVKRx9GKOIilj7gUMgcNlLH3AoZA4bsaTaJIKbbk4c0ajWxTpR8Bvl/SSjrY1YTu5JSCD27+1CU9lMweR0zbEMiZLJrYb0kNzhkP3JSylu7obViNUimyyO5dZO8IuJEJBw+GgIkfixtLfdDljSbRJBTbcnDmjUa2KdKPgN8v6SUdbGrCd3JKQQe3f2oSnspmDyOmbYhkTJZNbDekhucMh+5KWUt3dDasRqkU2WR3LrJ3hFxIhIOHw0BEj8WNpb7oc2JQAAEkpc93r7SDL5mTfd5Ej7MVeiXUeYVIWPgGqlL/P/NclWiy7sukJ4S1nS7V068Btb3g+W630PnfJvM+rXQEfep+Lb61K1GZxnGbh6C/v7PNiUAABJKXPd6+0gy+Zk33eRI+zFXol1HmFSFj4BqpS/z/zXJVosu7LpCeEtZ0u1dOvAbW94Plut9D53ybzPq10BH3qfi2+tStRmcZxm4egv7+zxMQU1FAwAJCAAEAAA//uUBAABEqhNYlDBHyZVCaxKGCPkyrVZiyGYdhFWqzFkMw7Cq64AFJJObFm/2CoeZnISMrWqu212b1bOB1rHGT3ZkXazcyPKsjfmxOhkEIWbtEjkwmpGoRP0JxkeOG60tp5Dv4o2I0L8vGKrYylKKphxLlqvT+GEFKuuABSSTmxZv9gqHmZyEjK1qrttdm9Wzgdaxxk92ZF2s3MjyrI35sToZBCFm7RI5MJqRqET9CcZHjhutLaeQ7+KNiNC/Lxiq2MpSiqYcS5ar0/hhBTpblRrtMohJu4cKGXpoBpDK6mqeQVdjQPxFPwX7JoCMRSHIzBGSODAldk2wnzu7fXi9Xi2FaR+Z3CZHjL57Ortm9/P4mbv/T6DZNDLL8z9fIxMJflw90tyo12mUQk3cOFDL00A0hldTVPIKuxoH4in4L9k0BGIpDkZgjJHBgSuybYT53dvrxerxbCtI/M7hMjxl89nV2ze/n8TN3/p9Bsmhll+Z+vkYmEvy4eTEFNRQAAA//uUBAAAAq9M4FBmGnBUiZwKDMNOCuEng6SEeIFcJPB0kI8Qia0QAlFK+xqFWBSQqIqMJU5XIKVL3F6yFXuccKNOVJVg/FMlVWMjIsKMCcFYez1lI0l+Wmcy+vU0S+WcKd1ywnn0i7f/XtnlqxWBlSajq9rFhqqqllETWiAAopT2NQqwKSFRFRhKnK5BSpe4vWQq9zjhRpypKsPimRKrGRkWFGBOCsPZ6ykaS/LTOZfXqaJfLOFO65YTz6Rdv/r2zy6ZWMUmo6vsWGqqqWUZ11+EAAJJvdeoVJTvbbRzQHkKEdjUB3PBT/W29RSJFm0ay9Wx+qJU47DQ1EJjHodiYmevljn0+Zw5Z2Z0qae41vT/8oVk30/zIOSoKJcBKhFxQm5OA60511+EAAJJvdeoVJTvbbRzQHkKEdjUB3PBT/W29RSJFm0ay9Wx+qJU47DQ1EJjHodiYmevljn0+Zw5Z2Z0qae41vT/8oVk30/zIOSoKJcBKhFxQm5OA60piCmg//uUBAAAAqg+32hpG8JVB9vtDSN4SukpgUGkcoFdJTAoNI5QgIQIAAAAKTkCEgIrXlpa12gcA3iCCbjviIRO1qJdGDVpQj8qQEpcr5W6P+o52T4Vv/7P+WFi6tc4W5IDjR6kSZAzd9J4IbtkyttxLN3frJB5Hmk3koCECAAAACk5AhICK15aWtdoHAN4ggm474iETtaiXRg1aUI/KkBKXK+Vuj/qOdk+Fb/+z/lhYurXOFuSA40epEmQM3fSeCG7ZMrbcSzd36yQeR5pN5J/VQACkm50rDo5CF1WmeHyIiiBYLuteZIsHzCYoYe69yW3LZfK8c0CIFFJEvscJTnc3Ns+ZRRvIsGWSkZCmY9bXuallXl+lClyPnVSeDQFCw5REbJPSvpf1UAApJudKw6OQhdVpnh8iIogWC7rXmSLB8wmKGHuvclty2XyvHNAiBRSRL7HCU53NzbPmUUbyLBlkpGQpmPW17mpZV5fpQpcj51Ung0BQsOURGyT0r6UxBTQ//uUBAAAArVJ41BiHYRWqTxqDEOwio1Jg6QEeoFRqTB0gI9Q67oUhJtyZwktJ2jO92QvBIboOzFApi0tBjF2X6REfBLFmSnwgYkOr3NVbcFAZ2xwuTqR6zhbx3P/BmmpAhaMXDHFDOqOQQRGMj2nFNWgdrKMdv6hAMCvXdCkJNuTOElpO0Z3uyF4JDdB2YoFMWloMYuy/SIj4JYsyU+EDEh1e5qrbgoDO2OFydSPWcLeO5/4M01IELRi4Y4oZ1RyCCIxke04pq0DtZRjt/UIBgV9kIIAAJKTe4L1MMUiC5t5npLfs+SbaGmB0Gi6QB4qYUd6Yweju8e1xtRzycEjPIeiBsY1nNk0TQ7lHhXdtc8/7hUfaP0/7zgJRZOReZ8L80Fn6ptfshBAABJSb3BephikQXNvM9Jb9nyTbQ0wOg0XSAPFTCjvTGD0d3j2uNqOeTgkZ5D0QNjGs5smiaHco8K7trnn/cKj7R+n/ecBKLJyLzPhfmgs/VNrTEFNRQAA//uUBAAAAotZ4NDDFeZRazwaGGK8yu1DjUGYdTFdqHGoMw6mEEgAAEkpX0+xubO1iTx9Zyi6LSnWm0lkmvAQFEM7yDthDp8X0WqR52KRzO/uUfqFOy0y63y9v/x89DcWjy+hmVMsyIyh6X7bb9tZyj/96sCgogkAAAklK+n2NzZ2sSePrOUXRaU602ksk14CAohneQdsIdPi+i1SPOxSOZ39yj9Qp2WmXW+Xt/+Pnobi0eX0MyplmRGUPS/bbftrOUf/vVgUF3r9EAkkAxJdlphEgDANTRNwhEzaPrJrPYSGz47v53mPDqrPDPsa+SNnWqKVL72x4znCjn3Md2Uv5BxkNVRidcnOO5nyltSuqxNip/nCfLcyzI+gJ6N7dG9fogEkgGJLstMIkAYBqaJuEImbR9ZNZ7CQ2fHd/O8x4dVZ4Z9jXyRs61RSpfe2PGc4Uc+5juyl/IOMhqqMTrk5x3M+UtqV1WJsVP84T5bmWZH0BPRvboTEFNRQMACQgABA//uUBAAAAplQ4+kDK/RTKhx9IGV+isU/i6MIbRFYp/F0YQ2ijraSIASTTkzB8UwRi0W9L2nxFSrP43lfwQdFmHTuZ2MTUl+OeTqTuwUs92eMv6EsiGnbd6oZUlZq9mOzHSOMqv5lPZJR6BqooiWxXRsrxWeOHcZHW0kQAkmnJmD4pgjFot6XtPiKlWfxvK/gg6LMOnczsYmpL8c8nUndgpZ7s8Zf0JZENO271QypKzV7MdmOkcZVfzKeySj0DVRREtiujZXis8cO4xppRIEApJty2ZpnHJvzyUIZqpjhkZhVXXDtYdAPzXhVPJem5vlzJKsf+np3JXNQuwKgmJ2Tfd+sYVvLHL7ypzBzBjvJ/+XvAjuhQwrsINsthlDKXBDCrTSiQIBSTblszTOOTfnkoQzVTHDIzCquuHaw6AfmvCqeS9NzfLmSVY/9PTuSuahdgVBMTsm+79YwreWOX3lTmDmDHeT/8veBHdChhXYQbZbDKGUuCGFUxBTUUDAAkIAA//uUBAAAAqVP4WhmG7JUqfwtDMN2SrUtf0GkdElWpa/oNI6JRjbaCACSUn2a6KxsbGHpVbrAVaibltfYNZx8gYqfezhGWPCa084Z7XHLuSHcj08v0pH1uK4JDJaZUkJd6foVYpzr3h/5sDigznWqOHQXKAGPUtMaCjG20EAEkpPs10VjY2MPSq3WAq1E3La+wazj5AxU+9nCMseE1p5wz2uOXckO5Hp5fpSPrcVwSGS0ypIS70/QqxTnXvD/zYHFBnOtUcOguUAMepaY0ESYAAACU7tMinY7MiKRA1o1JQJiF05htZYaIx8khOF1MUXk3wlvrnMYnOt+0+lm1n5bFVpFRDmefPvKWUb1JFqHe7ZlXMitMffh0w6YBiMCoKCvO//2JMAAABKd2mRTsdmRFIga0akoExC6cw2ssNEY+SQnC6mKLyb4S31zmMTnW/afSzaz8tiq0iohzPPn3lLKN6ki1DvdsyrmRWmPvw6YdMAxGBUFBXnf/7TEFNRQAAAA//uUBAAAAqNI42jBHiRUSRxtGCPEiuUjh0GYbtlWJHH0EwwrbriZCIKSbc2HplkEqZZ7NiE/3uPxuTz9Zvn0q4QNK3/WFKJENAQodNJCJHvuogywZr5d1YcJcfbsWN9pSP50/Lnv2efJ9uzjNGhMuGD1dfiQRA4CbdcTIRBSTbmw9MsglTLPZsQn+9x+NyefrN8+lXCBpW/6wpRIhoCFDppIRI991EGWDNfLurDhLj7di7faUj+dPy579nnyfbs4zRoTLhg9XX4kEQOAm1LoAJRSbt3ro9IlQQSUFLPs4Ka78P8P+QFkweqFS55qILpLida9myt3+lqSM6LUXPqRqCKbmuflL2KT++HM868YdkkoVEMlyLoI/j8GCMy5mxbv/9ayXTbSqAISabkx7e4t8yYGKQoKG/BUN9L9ygsmD1QqXPNRBdJcTrXs2Vu/0tSRnRai59KZl84vPI72KT++HM868YdkkoVEMlyLoI/j8GCMy5mxbv/9ayXTEFNRQAAA//uUBAAAAqdQYdDDFlRSygxtBMMEix1BjYGYdjFiqDGwMw7Gq9UAFJJNzDYemDv5pV+aw7bmhuNkqecj82wxtb41JeEGgvCu7ZxULwmxr0sElzNIcuua5r5Gxq5a6XXS2ZX9JIO5/qriBkhnnyJCQSJcMZ8oWCaP0JOQogEFNNuVBZ6YO+rE+uUN1gkoQUarp9cZZ8My/aP13bOKITJPO9+JfNIaV1hqbKGPpnXNbS3fS2ZX9Phuf5KaEWf19QkIIQKTMMx8ULBMx+hqjTUBBFhBzYSAgUU3F12Cp57qjEpKJrF2AakAop9qrzWlPG1MEX05YVkqdl5nFFmScOoZBzPynpqaAiI6tSueTJyKRzhqZtlzGEZA+CHi5OFkBqDNEBACHsUSagIIsIObCQFtTcXXYKnnuqMSkomsXYBqQCin2qvNaU8bUwRfTlhWSp2XmcUWZJw6jKHwcMp0tWiIR1alc8mTkUjnDUzbLmMIyB8EPFycLIDUGaEAEBD2JiCA//uUBAAAAqpP4uhiHoJWiXxNDEPQSnUlf0GkbUlUqfDoYo669tdbIATk2/wlTaKLEE2rl0wwvUbGLlPf9xgEBc4xbLofy0M4XT0liSvzJoKJiBxhHChkMz5A7A1fphj3Ik5lGrapQxW7i2akhD5iPlpnhfS1RjM5aTWRyIgAuS3eiVNoosQjauIOmGF6jYxco+/m4wkKZxi2XCH7WgZwunpLElezJoxGQPZPKGQzPkDsDV+mGPciTmUatqlDFfcdmpIQ5MI+Wm6CZpAUWPVpkAKAAAElKU00aCYHR4o3KzJrs0IgjXKFyH1s/MUQEEkCOc7OvJyntiyQvyPKrq/JTJCYfzX7b+eLnDJCPyvS+F7n1/P+TLnkRUhaiaxAdYAn9rxqqpSAAFJJObHimxj4tpV6dSXznDW5hZvTw5EHIc+6nRKK8zg7EZVs8cNLET0QrsQhg2jlsqrzxdKOxGfZato2d6n36JamxFSFqJpTpkV1UyaeuYz/1pTEFNRQAAAA//uUBAAAAp9PYFBoGvBUKAwKDQNcStEnf0SMuQFdpbA0YZchaWoAANJy55q7vAmYG+7ohWYIwKz7UfS/V0yqFhMu8xZd9PtG4MpTIi1IWqX1uqhoU8itlb4XBV2cZ89N1IucmH4kdMJEIkPvCU6V51J3NigTrhIm0twAAaTlzzV3eBMwN7LdEKzBGBWfaj6X6umVQsJl3mDDnk+03BlKZEWpC1S+t1UNCnkVsrfC4KuzjPnpupFzkw/EjzCQQgfeQXNVaJMbjQo9LkinxbQAAAlK9pWvT6pOp5Dy9SRTcsRn8mrrlFOrFBM4JdMZKdQQ2T5odYzp69jopoRN+YfzWlLJj+UM2ygxdZB8pD+XffVtG2+8jcGKLAk4k4Ep50GnoqnGElEAAAQU3uka3ZJmLa8jndqJXhwOHzTdVBnNkyyhuoZVtBDZPmh1jPPvY6KaETfm/moMoDRKP5Q3YyYSXWQVlIfyZ99WajWbrdA43BiixIr1TAZkt3IamIKaigAA//uUBAAAArVKZOjDN6xTiVx9DMOxio0neyGwbUFRpO9kNg2oqcbjIIJSQLggqP6gyLayDzk1XZmV/ze3xvTrokfv/eG/+P4rN7Pn+DpWyc02S2ywJTbOCpDQRj1GPz2729KGfWN8XPp35mXn9MLf61B0CQP0XpKtUf9MTiTRBBJJAUCRPZAkeOIqkTMQSQRTULgqU2o5IkL3P6k/JdGI+ZeQ5DxyOaw7gqZ5xuHBGPYGbxzbXq9Ghn1jfeff+Zl5/UtzjDiAxn7k3nYJ0c0ySAAAFYZ4PdlCnRDBtttxo0WVGhAYvVaRqNIRZrc7QyKsXP5f3OEW5QEy2T22OUey6HyF7VqtI0Lf+mIgR6RsWRJbkeUKG/S8PQhIpe8QMn5CYSmmSQAAArDPB7soU6IYNttuNGiyo0IDF6rSNRpCLNbnaGRVi5/L+5wi3KAmWye2xyj2XQ+QvatVpGhb/0xECPSNiyJLcjyhQ36Xh6EJFL3iBk/ITCU0mIKaigYAEhAA//uUBAAAAodKY1EBHQRUiUxqDCOgi003h0MMa9FoJvDoYwwKq6pUEpNuYba3alrLugyHWC3KRQeSZpyatubwOKpd7fvy8k6ac4mX2fL6hJoeleEbmujmai7oVZSDl7b0ztJv6ab7N0wgIy9ugzKA4Ff+xwCY11SIKSbk11M1DrXdAUdYHcMihk6ThStubwOKpdtB3fwV5J005xMv58t1CSIelDwmzU45mov0KspBy9jd2HDujF0O6YchTHTCAjL26DMoDgV/7HAJlfUgAJJJzCN1EXNmZNUtFJWoPSjBMDOFCUc33ChF/PIOtiBRaFSX/zy1SdM0kNkC6EH8jcMZ9LPY0iaDZvxUcAIdlxi+qaZ5+ZVbj6qqhTw+HI72HOI0iUnIqrqkABJJOYRuoi5eErMtFJWoPSjBMDOFCUc33ChF/PIOtiBRaFSX/zy7UMjymxoRIQfyMw2XukDQcjPpZvxUcAIdlxi+qaZ5+ZVbj6qqhTw+HI72HOI0iUnIqTEE//uUBAAAAqlG4VBmG5RTKNwqDMNyitkpfUGkbwFgo2/oZI4aXVgAAlJJ2mDMM2pvTN594ET0dFkOJ4dUUxo2CS/1PllI03NTv1wdZMQZmptTdMLXonVQ76nsStX+ExsST+LeGbfCPz/n4yiQMys6Pbl3k01sU1qpRK6sAAElJO0wZhm1N6ZvPvAiejoshxPDqimNGwSX+p8spGm5qd+9uVTMtiIh8gteidSdq0O0jvC7DYin8W8M2+Efn/PxlEgZlZ0e3LvJprYprVSiaoQAABRKnrjDCIKakaFTU96OegqFBS6kCXbdBty0lsAVmUvS5+2GI89rPs6YNFp2qc8ytlKfX5lsfsSHNr52xqkzMz2U8+l/VA2J7PFk4M1gNYLVZf+cWhAAAEkpR7UoYw6nxcY+zvWTvRkUErqQJdvMbdKpYFWdl78/bDCTxW1k7POp3Y6ZExlbKUbcf6RZ+yI0Vr52xqiZmYomU4fS72izGi0LvnZJ4lZYyf66yiYgpqKA//uUBAAAAqBHY2giGAZUCOxtBEMAywkzf6GkbwlhJm/0NI3hMjTSBJCbbctigAQoBDIhUwaQFehKgJYjyO7lWRAxn6OnpfAGEjC5TcMvAt4LRLlFzPLdgqqbwiyzcmI4DrStLMic5z3N+bef3yceDjKHd3/aQlNHMjTSBJCbbctigAQoBDIhUwaQFehKgJYjyO7lWRAxn6OnpfAGEjC5TcMvAt4LRLlFzPLdgqqbwiyzcmI4DrStLMic5z3N+bef3yceDjKHd3/aQlNHFqQQAABRTU+xhoKOVyQY7TeOqssFiHwx0V8MJadA+bY3KvpUz836CJQhtT/SXILy/7tcpsveIROdAnBAYKYEjVzQiuVItm73/v8v2uVZurmijuMRJe9O7wWpBAAAFFNT7GGgo5XJBjtN46qywWIfDHRXwwlp0D5tjcq+lTPzfoIlCG1P9JcgvL/u1ymy94hE50CcEBgpgSNXNCK5Ui2bvf+/y/a5Vm6uaKO4xEl707vExBTQ//uUBAAAAp5Q4dBhHIRTyhw6DCOQizkxhaGYbUlnJjC0Mw2pqukAAlJJ1BaNBTmYUlpPtZvZAWRRWlDkIZBJtCKcSMV6nB9ed0sikaDFDSFoUrNm7RvKjI1I+qbczQ7HUs+3npwznOlUr5MmZEkRjeKO9w06bnO+q6QACUknUFo0FOZhSWk+1m9kBZFFaUOQhkEm0IpxIxXqcH153SyKRoMUNIWhSs2btG8qMjUj6ptzNDsdSz7eenDOc6VSvkyZkSRGN4o73DTpuc721GkQCAnJLtRRvhx1ZIkR+XbYYMxth9Q16Q5ekE5RS36xEDLWLq9BZRcG+elgQxDObVj5bZdTc6eOueawkHQ+kR0hzhWEJkVehOsX+7wVSgWiBQijc6O73FkbUaRAICcku1FG+HHVkiRH5dthgzG2H1DXpDl6QTlFLfrEQMtYur0FlFwb56WBDEM5tWPltl1Nzp4655rCQdD6RHSHOFYQmRV6E6xf7vBVKBaIFCKNzo7vcWRM//uUBAAAAqNNYGhpG8BUaawNDSN4Ctj/h0MIeFlbH/DoYQ8LRcSYAABRSc7rVxicHemzqTTx+Lw3VafbdusgXZA9783+S2ufTWuy2IZJ59z7l9Rbrbopa4Q2Ipkawtykrf6rHkrbnKn88zJS+fl15hg5ZULHbGMzKLiTAAAKKTndauMTg702dSaePxeG6rT7bt1kC7IHvfm/yW1z6a12WxDJPPufcvqLdbdFLXCGxFMjWFuUlb/VY8lbc5U/nmZKXz8uvMMHLKhY7YxmZploEApJN3KQZpGS3rdNpzGn8O9ulvYvdZ7UOc6M3+150uGmad/7claHWvmZWM2VVjTaqaiPIxORT2RLRaAzFVyGUIhUzNJtOmsbiLjTTYqOnmP/8X/pWmWgQCkk3cpBmkZLet02nMafw726W9i91ntQ5zozf7XnS4aZp3/tyVoda+ZlYzZVWNNqpqI8jE5FPZEtFoDMVXIZQiFTM0m06axuIuNNNio6eY//xf+lUxBTUUAA//uUBAAAAqZO49DFHRRUydx6GKOiiwlJg0QYckFhKTBogw5I++6YFNtyaIv7dM6o16u6y6B7+2cVuTVKyFBnq7Vd8+8WNbg59F/Sb5lHhW7n7IxPyqxq1hG9NMz5W2gmJu8mSpKcMi3fPovZPmCvhjzkAke0vkh2Q++6YFNtyaIv7dM6o16u6y6B7+2cVuTVKyFBnq7Vd8+8WNbg59F/Sb5lHhW7n7IxPyqxq1hG9NMz5W2gmJu8mSpKcMi3fPovZPmCvhjzkAke0vkh2Ql1IAAtOTe1qzqrqSfW9zaYPgcdtTZT+RF/aHJEJrSc3O7J4IhtUzYyLmUkJiHmCwaIVI9ij3UMuwLctjiG997DJL+mHJgtzNLXJsIzD3/4eupwZg31IfYuXUgAC05N7WrOqupJ9b3Npg+Bx21NlP5EX9ockQmtJzc7sngiG1TNjIuZSQmIeYLBohUj2KPdQy7Aty2OIb33sMkv6YcmC3M0tcmwjMPf/h66nBmDfUh9i0xB//uUBAAAAqlQ4uhhH5RVKhxdDCPyit0PjaGYcBFbofG0Mw4CibbSAIKSScwEuzwGyMP6A+TBNKh/SukOG4MGBozE78Ol5ybU232Hp9IpunmtlZUQ3PMZlGt2S5q0GFJ58a+RHTQt3IDInqkT9iBOK+Fc8KO8JLEuCsTbaQBBSSTmAl2eA2Rh/QHyYJpUP6V0hw3BgwNGYnfh0vOTam2+w9PpFN081srKiG55jMo1uyXNWgwpPPjXyI6aFu5AZE9UifsQJxXwrnhR3hJYlwVTjbaCACbTkzo6hK4ZJ10nCrsMUYZ9kVZ1fFBD70Mi2RMKUmEU1s1U2ZiYkJDh5Tzcv3yqnwQ9h5qbCTr5AwjOQPJVg3ULOgyyilwOHgkiImiaKne9bgynG20EAE2nJnR1CVwyTrpOFXYYowz7Iqzq+KCH3oZFsiYUpMIprZqpszExISHDynm5fvlVPgh7DzU2EnXyBhGcgeSrBuoWdBllFLgcPBJERNE0VO963BlMQU1F//uUBAAAAqwzYWhhHwJVhmwtDCPgSu0zh+SYY8ldpnD8kwx5jbcaIADbcl5BUMLTGTAq6pCewd2DCd3YbhmJDooYYUfhnBsTlo3CZ/ElpuCRZRfbzuVLYIpk0SQOEWVWE7EaHOke1fBmHhKe3uUjioqXCe3+s7/1/8jbcaIADbcl5BUMLTGTAq6pCewd2DCd3YbhmJDooYYUfhnBsTlo3CZ/ElpuCRZRfbzuVLYIpk0SQOEWVWE7EaHOke1fBmHhKe3uUjioqXCe3+s7/1/8l1JSQwAQE5JdSUSYptYxrbfku2bymq6HErYIOfhtYGGI6eYe+fClSEwKlqXhBsifaO6SEzWp4OK7WoTWzjSTLMqmL/IqRpohZlttmRGk0lHdxZrK11RE0upKSGACAnJLqSiTFNrGNbb8l2zeU1XQ4lbBBz8NrAwxHTzD3z4UqQmBUtS8INkT7R3SQma1PBxXa1Ca2caSZZlUxf5FSNNELMttsyI0mko7uLNZWuqImTEE//uUBAAAArVJY8jGGn5WqSx5GMNPyp1Hh6MEeAFTqPD0YI8A+6pIaUXFYZtYF67qruzGf1aqi7BJat3t4YQKuk3YW8DQK9sqCUOgQs8fcJcIZNThsduVq0+FsZeVOVIflTeOQtv1vDbRM7cEWiXaUH4zwuNpu90lE/7X3VJDSi4rDNrAvXdVd2Yz+rVUXYJLVu9vDCBV0m7C3gaBXtlQSh0CFnj7hLhDJqcNjtytWnwtjLypypD8qbxyFt+t4baJnbgi0S7Sg/GeFxtN3ukon/a2udjBQCkkv5rnO6aSJq04Vj8v/bTSGJPTMhWdj/gqtavjkxmj5b9QrXG4zQOblk5si1Kr0zqvfY7XnTq5mff2Yv49MsjKP5RzSD2X90PvVpk7Vw0DbXOxgoBSSX81zndNJE1acKx+X/tppDEnpmQrOx/wVWtXxyYzR8t+oVrjcZoHNyyc2RalV6Z1Xvsdrzp1czPv7MX8emWRlH8o5pB7L+6H3q0ydq4aBkxBTUUA//uUBAAAAqJLYVEFHPZUSWwqIKOeyzUjjaWgctlmpHG0tA5bVVkAAopNxGeIkyKWFOYRJapp7DoKcrzcoo7hIzs9iM9rKjzFETUu6erzVZKGFVBWnbcQUjuNed326u1Gd9MSIK8Jy3t3ekmsjriXwYNz1G/BKM9DFVZAAKKTcRniJMilhTmESWqaew6CnK83KKO4SM7PYjPayo8xRE1Lunq81WShhVQVp23EFI7jXnd9urtRnfTEiCvCct7d3pJrI64l8GDc9RvwSjPQyttJoogpttzDEsqmtc532aMjjiaOFI0qa3c/aD+wwiTb/2xg2vFk0yJxo60YVbsL2IpcU1PGm6hn4RhZoNw81pJvfsgxHm8z/vn5kQZNAuQlWbOCG606NE/9VtpNFEFNtuYYllU1rnO+zRkccTRwpGlTW7n7Qf2GESbf+2MG14smmRONHWjCrdhexFLimp403UM/CMLNBuHmtJN79kGI83mf98/MiDJoFyEqzZwQ3WnRon/o//uUBAAAAptR39EBHqBTajv6ICPUCyjtgaQEfAFlHbA0gI+AJ1wAAlFOeKqKhGKmpU0ZDLI6HcITOaGoWKnDLhA7OSVpbq1WTW6PaOUkStIl1kyF7JmrFhpZ+T3Q3K9uZI8hw75X4Tr1aDXSR1IqXpM50QoE/00k64AASinPFVFQjFTUqaMhlkdDuEJnNDULFThlwgdnJK0t1arJrdHtHKSJWkS6yZC9kzViw0s/J7oble3MkeQ4d8r8J16tBrpI6kVL0mc6IUCf6aZGSgiAAU05OYx+aukVS3GWXOUxBAidqcU1ri4QsMCU+iUIu+htkmeWOa0qouLpsYBNglQIMe/kjFdNt4Zx8zyzGNn0ygQkVHKe3cLixFbSahK9YjbIHf+KDZGSgiAAU05OYx+aukVS3GWXOUxBAidqcU1ri4QsMCU+iUIu+htkmeWOa0qouLpsYBNglQIMe/kjFdNt4Zx8zyzGNn0ygQkVHKe3cLixFbSahK9YjbIHf+KDUxBA//uUBAAAAqtQ5WhhH4xVahytDCPxis0ZhUGYatFZozCoMw1akibaKQKSJKqDOGSFhHelbbOIoMQ5vXuREZAJmNmZa9Cl+AU87ff64g9hJOcVl0R4ck3MLQ7T3v1AULeSGeZrbc/8qdOqWLDoj1F+5KSIQGxdzP5dItJE20UgUkSVUGcMkLCO9K22cRQYhzevciIyATMbMy16FL8Ap52+/1xB7CSc4rLojw5JuYWh2nvfqAoW8kM8zW25/5U6dUsWHRHqL9yUkQgNi7mfy6RbWWAACSknKIuZB+Fse6EZ+YUkBKLr0wyOn1w4RiPFKHkzywutpGTkZ7ThlPfl8h29SYoZ/TEXqlcmPeUuUyP5xp6HwsieARlzJUTkgqABweMlAqGv85RrLAABJSTlEXMg/C2PdCM/MKSAlF16YZHT64cIxHilDyZ5YXW0jJyM9pwynvy+Q7epMUM/piL1SuTHvKXKZH8409D4WRPAIy5kqJyQVAA4PGSgVDX+coTEFNRQ//uUBAAAAp1O4ekjFPJTqdw9JGKeSyT9eyGwbUlkn69kNg2plfc9QYDbkm6qa0Jbd7cFA7veZQWpOSxPYJTaKKaGUcJela79zOdWS9yM+lreaqdSGghald3hxUM25bUOdKOWhX7m58l/N5zqDBlIzPYrKKe7tgLEr7nqDAbck3VTWhLbvbgoHd7zKC1JyWJ7BKbRRTQyjhL0rXfuZzqyXuRn0tbzVTqQ0ELUru8OKhm3LahzpRy0K/c3Pkv5vOdQYMpGZ7FZRT3dsBYCBAABFvc1ggXo5km5s+7VCZMF5sePx15qzruprnRTC3ThmCMObqxbSEC5CVChmbOan5Ipg5l+AuZJ0j9NEDLncjykOrkHGJSYw8qMt8DZcH8wTmLJ8j3o3kECAACLe5rBAvRzJNzZ92qEyYLzY8fjrzVnXdTXOimFunDMEYc3Vi2kIFyEqFDM2c1PyRTBzL8BcyTpH6aIGXO5HlIdXIOMSkxh5UZb4Gy4P5gnMWT5HvRvJMQQ//uUBAAAApstXjhsGnBTZavHDYNOCwVJhaGYaclgqTC0Mw05BQAACCoAhmFrN9mYLOTrr9YFwel0WU617T5xG+gQplhygwlmVCiv0GsQ8EWQR5Z0kLnHwZ0yjMgjoQwyMrF1WPiIzlUKWUO88daBhATQ9JhphCEAoAABBUAQzC1m+zMFnJ11+sC4PS6LKda9p84jfQIUyw5QYSzKhRX6DWIeCLII8s6SFzj4M6ZRmQR0IYZGVi6rHxEZyqFLKHeeOtAwgJoekw0whCKlGWgEAknL+Hp3QVFkbSa9OvOkxNWIbuddvg4uaKRvPC1coR81ZaYI5lD0S/80BQWWR3I8u1hb03QkCL5lls5xCIQqqQb0czO/+j6VccKLCS+KU5bQcILJUoy0AgEk5fw9O6CosjaTXp150mJqxDdzrt8HFzRSN54WrlCPmrLTBHMoeiX/mgKCyyO5Hl2sLem6EgRfMstnOIRCFVSDejmZ3/0fSrjhRYSXxSnLaDhBZExBTUUA//uUBAAAAqJQYdBmG7ZUSgw6DMN2yu01gaMkdgldprA0ZI7Bm2gUApJN9q/VcVKSBjP78JETSJGb8bbeQPQ6gxVL6fNzV5yoEjQ/0VBLDkQg95gs0WFeNLofaZnS1zJyWQwgCUNafa+TNt2K825kl1U4V65KJmiCZtoFAKSTfav1XFSkgYz+/CRE0iRm/G23kD0OoMVS+nzc1ecqBI0P9FQSw5EIPeYLNFhXjS6H2mZ0tcyclkMIAlDWn2vkzbdivNuZJdVOFeuSiZogmZRuEAABJOXoUkkXMxcMVTXdPBdEAJT3nYWOeytDqyGSCDs1fIy2ZTCdc9JetEzkInL83ZcGbGeUOAcKeltrg6VqVQ3NDvPU8y5DvcNRi81sz0BlamN0STKNwgAAJJy9Ckki5mLhiqa7p4LogBKe87Cxz2VodWQyQQdmr5GWzKYTrnpL1omchE5fm7LgzYzyhwDhT0ttcHStSqG5od56nmXId7hqMXmtmegMrUxuiRMQU1FA//uUBAAAArJH4XjGGnJWSPwvGMNOSnEBh0MMeBlOIDDoYY8DZEOJEhEAEo3cAmsroZmlA5H6143teu6Os/N+SWNTbmgknv7Ye8JM56IT/THh31IKRHOd+mxU4ky55oimZydbGrbkQNkxHV5kZvNiZQYrKWUqCxbqoraZEOJEhEAEo3cAmsroZmlA5H6143teu6Os/N+SWNTbmgknv7Ye8JM56IT/THh31IKRHOd+mxU4ky55oimZydbGrbkQNkxHV5kZvNiZQYrKWUqCxbqora7/pAAlJN46KPkwsmnVR3ZCc7yWvq0vtNNyBKL5aAQZ2FdZ7lzwecjH2CZb+ejy2q8WLCQvr5RjWC0KIJnCNlUQWRGHcsG5irH0ptY2KG/S/9TxFu/6QAJSTeOij5MLJp1Ud2QnO8lr6tL7TTcgSi+WgEGdhXWe5c8HnIx9gmW/no8tqvFiwkL6+UY1gtCiCZwjZVEFkRh3LBuYqx9KbWNihv0v/U8RZMQU1FAwAJCA//uUBAAAAqdT4+hmHYRU6nx9DMOwitU3hUGEchFaJvCoMI5CVicaRIKTbc2oQOFeO5gAhAkiGroTqeDLv04USKLe27yzlLOo/KpftGw5oSGdWiS2hMU9HWJSP1hqXqcIrDkvlf/zv0rMnn1zLyFNot5r5RTFyigH0KxONIkFJtubUIHCvHcwAQgSRDV0J1PBl36cKJFFvbd5ZylnUflUv2jYc0JDOrRJbQmKejrEpH6w1L1OEVhyXyv/536VmTz65l5Cm0W818opi5RQD6K5VQAJSScotVCqgUPunuTJFxaYklbJAq1QNQo6MWFEZspsZQR8p1tYrZDczkQTKW4lTPZSmvz1UmyNulmzwjc6/6tKdOeSRMzPQuLWmYwqKiynjqemUVXKqABKSTlFqoVUCh909yZIuLTEkrZIFWqBqFHRiwojNlNjKCPlOtrFbIbmciCZS3EqZ7KU1+eqk2RsVKc0Iz6+erSnTnkkTMz0Li1pmMKiosp46nplFJiCmooA//uUBAAAArFPYOjIGnBWakxPGCPBCuExfUMkdElZpjA0NI6JcXdSABBabc0EJP55w533ZrTPTUtbWEabNsqFcb2aHQbfr5ncmQcW1x6yG/l3amjkpmpX/Yj0KQz0zb2WKiEUjWL1u3S+fcuPjTa+r5pLtIPjkAoT+/QjHKsZgBEJpEuwQk/nnDnf21bnT/m52Wii9R2vOl/ZOD3zHbDQkHdrnWhuRF3amjkpmRX/Yj0KQz0zb2LK09wUJNc4Rafn+XHxE2vq+aS7NB85kJQn/oSF8AAEkpyXbYXHtsfT6pyL0aLwuduHp2IIsgHIi7DQGifeDhGQPio6V82PZrmUqPxDQ91b5D8nNgUO0lubJkatcs9dmJ82vS6XmXncc6jmbDYKdQMWZXRZSkAAASSdy2Gg6bwqYdmoDTChyBqbpm7IYyF0S8JBpHvBwjK+qOlfNj2a5lKj8Q0PdW+Q/JzYFDtJbmyeV5fszhxSNr0ul5lmdgpqIczFDUFOoGLMrpiC//uUBAAAArNO4ukhGYRU6dwqGCPEir07gaGkdEFXJ3A0NI6IVcTaJABSac1rLhZFCKNN2cakKl6RufxkI9whSg2aZGRISr+RXnqu1bP4c+9NbA+BOcZDQmOf9z+nbCztm27Cr3diyh3y0qp6sREClh0QCoxg93UcLkkv7SAAEUk69OcAjJTzbq8fKZ++bevrJRO+yEMWBnUU+NIka2kORwhEIxeTLPTWwPgTnGQ0Jjn/ad6bvCtc223p/d2LKHfLSqnrMikudEAqMYt3UcLkkZWZAAAE2nfbDDqIo68NwFwcjGloQ6jMz+uRzlQWQI2dXDEeyeRiiU18paT6PQQTp5BuVj3LfhWn5obn30ynfJ1Uill8u+8O9LYbfwWv8POiC5N13RSjKzIAAAm077YYdRFHXhuAuDkY0tCHUZmf1yOcqCyBGzq4Yj2TyMUSmvlLSfR6CCdPINyse5b8K0/NDc++mU75VVIpZfLvvDvS2G38Fr/DzoguTdd0UpiCmooA//uUBAAAAqNQYGhmHDJUSgwNDMOGSvErg6GYbwlUpXD0NI3JVZMgAABSbdwXocm1KwUyt57NnYCVCMtCPUCdEgGCwEepJHr0rsaZxynohwpCJiyLPReiEJj6UbmLMZu3vxckOhLkiG6/9vkZZGNKyeTT/P/MHAm8yrJkAAAKTbuC9Dk2pWCmVvPZs7ASoRloR6gTokAwWAj1JI9eldjTOOU9EOFIRMWRZ6L0QhMfSjcxZjN29+LlDoS5Ihuv/b5GWRjSsnk0/z/zBwJvNNUmRUACm3NTCBgwYpCNinTskkc2wA8+M0fCCZSJgl7HFk7DLcz2uesv3WhLTNIef6uTvOovTp5GfoShqSSLXMyxiYZRWXDrFRzScZ5AHToIo7/n6Csl49+biOhATkl+MIGDBikI2KdOyKJatUDZZSJ4A4JQgO0VRdhluZ7XPWX7rQlpmkPP9XJ3nUXp08jP+qGpJnfzuMTDKKy4dYqOaTjPIA6dBFHf8/QVkvHTEFNRQAAA//uUBAAAAqVT31EMHRBVB8wdIYOwCw1RiUMYa9leKjF0MI+CU5EQAEop7a1pKRrf1XVOj3QUARtqQiB61oM5hMuB15JY3X9pGB2ElMySJTpeXkXzfudNghZ/59y/ypTuieWfXrnnxEyf+ZR4RvnC+ZHaVPzIcdXZemo2UmgUnHJ9mWkpGt/VdU6PdBQBG2pCIZmiOgTLhS8xYxa/tIdsIqeSMlOlMvGX237m7MEUjz84XFPnfRRyrZZ9F0PpUCCA/jAsZPjnKQPJE5o2z03X9CAkmm7cGCZenmpLTVe3M03uKTfm735UM3mB9a5OpKVKmWSpv7OVpsWhTafFPxAzaz1uoSF0i9y+TV42FqMqyV7kRFmOf599aRdnyg3Nc9NTMEet5tr9bajaRICaabroCCha1AWUGLGc3VWm6Chdwp9wSSawXDoG1BEo0NFEM9rByDmxKBFFyp+IGbWeV1SF0p9nJO83C1GVf7ciIvM/z760i7Plrnc+a+CNCY82tMQQ//uUBAAAAp5R4+hhHcRTyjx9DCO4iyFPjaSkYFlkKfG0lIwLskcbSICbbcoGCMOGcYXYIZ/ZDg+GMp0uVt0pI0JKTCFq4gnZmDNJDRsAj0QmOxExW6o55LXMZk0Zo6flaNkN5HMV/39SHh+eboijCulapYyw55amyRxtIgJttygYIw4Zxhdghn9kOD4YynS5W3SkjQkpMIWriCdmYM0kNGwCPRCY7ETFbqjnktM0ZCRj6kuVo2Q3kcxX/f1IeH55uiKMK6VqljLDnlqbK3G0UQm23MINi0MINCgSIkUnNUQojdcFSUS4oOMnqe34N2dx83JMzze+lrpiSnK0StEyWHXv+EVkMzihA86TGJhlN7ku/crS+RU+FYww3rjLJHMvHV3TnbsrcbRRCbbcwg2LQwg0KBIiRSc1RCiN1wVJRLig4yep7fg3Z3HzckzPN76WumJKcrRK0TJYde/4RWQzOKEDzpMYmGU3uS79ytL5FT4VjDDeuMskcy8dXdOdtMQQ//uUBAAAApFUY+jCHDRSKox9GEOGizVNf6Gkcolmqa/0NI5RbkjbZQCbbkswd0TeHy59VrxGwos1tvBUCm1tyNaSgml96UYlTsiboSblI7lDD0knmlLoh6LZ9bmZ/5J1sun5supw2tpAiLOarC5DXqFHPO0ZNjckbbKATbclmDuibw+XPqteI2FFmtt4KgU2tuRrSUE0vvSjEqdkTdCTcpHcoYekk80pdEPRbPrczP/JOtl0/Nl1OG1tIERZzVYXIa9Qo552jJsicRZQAALTltN9txeCsY2VgTjE50RF8W1payI1XHNHExpNeM6CMGXOtt5TIU5PxzIiJzMtCuWuXTi1M0BiIVjoML9IaKwgQbQ16ZmvD+VPL/552GnhK5q0xxUTiLKAABactpvtuLwVjGysCcYnOiIvi2tLWRGq45o4mNJrxnQRgy51tvKZCnJ+OZEROZloVy1y6cWpmgMRCsdBhfpDRWECDaGvTM14fyp5f/POw08JXNWmOKTEFNRQ//uUBAAAArBP4ekDFlJWCfw9IGLKStVDg6GkdglaqHB0NI7B03bjYICckv7QpSDGCDHbwtTU3NRdVH0VrSUgdoK8NA+kFUei7p02OC5vXps0BQ70hoR6s6BUtYmiYhrNCZiSm6UyeI4c6VuY7/fz6NfovxNzrGPvi43TduNggJyS/tClIMYIMdvC1NTc1F1UfRWtJSB2grw0D6QVR6LunTY4Lm9emzQFDvSGhHqzoFS1iaJiGs0JmJKbpTJ4jhzpW5jv9/Po1+i/E3OsY++LjXpE4iAAUU5aYoFRAxMg4NLkhNXFkEDAyLNLEIOghgq+16xCqg43KD+UiOlZTNKGzhIRdvoqG53zdD6gY5K3Za6ISMwwJuzZieFn5+NP9zv+sUvqCE0so9InEQACinLTFAqIGJkHBpckJq4sggYGRZpYhB0EMFX2vWIVUHG5QfykR0rKZpQ2cJCLt9FQ3O+bofUDHJW7LXRCRmGBN2bMTws/Pxp/ud/1il9QQmllExBA//uUBAAAAqVQ4ujBH4ZUqhxdGCPwyuFFgaGkdElcKLA0NI6JaTUaRQCSTcyJrt1PUOBUvPGbJaRUvGOQuvjVPrDPG1BirqvubaTS+ff8rl6249DuXDOzLXGqgQd8JZbuZwum9OtBs7C/s/89SB/I5fMvY70wM4KYs0mo0igEkm5kTXbqeocCpeeM2S0ipeMchdfGqfWGeNqDFXVfc20ml8+/5XL1tx6HcuGdmWuNVAg74Sy3czhdN6daDZ2F/Z/56kD+Ry+Zex3pgZwUxZGORYkgBFqXqqYyIQpKRkjElUmGQhHF/kjqFoLuLwYib6ojcXMZe9Qpne53B8RGqxioUJajN6JtlO0p14SkXynEOnRjb8hJtz2Ij6eNE0DG+UfjBjvhN1GORYkgBFqXqqYyIQpKRkjElUmGQhHF/kjqFoLuLwYib6ojcXMZe9Qpne53B8RGqxioUJajN6JtlO0p14SkXynEOnRjb8hJtz2Ij6eNE0DG+UfjBjvhN1MQU1FA//uUBAAAAqBN4+hjNXRUCbx9DGauitUpjaMUcpFapTG0Yo5SdbjkaQKabczxBQdlgYnRjFOYIzWg2KEa3yKYVxJC0lIbbhHsWpEiiS/ykPRYPEMzOlM+NPUzKPUjH1YXyxaCNh42vZ/PL8u8eUqzXZJvAZg/rjGqdbjkaQKabczxBQdlgYnRjFOYIzWg2KEa3yKYVxJC0lIbbhHsWpEiiS/ykPRYPEMzOlM+NPUzKPUjH1YXyxaCNh42vZ/PL8u8eUqzXZJvAZg/rjGqbbksaQCaacroH3B+yup6SQNt7MQ+nXRTXZkqEBrRVqCChmZprRB+bmrZlSyUuA6lMRN9jLKo1y9z/8oWfkSootgR03/8oUO5woqLTRB3PBkInpEMCH9zbcljSATTTldA+4P2V1PSSBtvZiH066Ka7MlQgNaKtQQUMzNNaIPzc1bMqWSlwHUpiJvsZZVGuXuf/lCz8iVFFsCOm//lCh3OFFRaaIO54MhE9IhgQ/uTEFNRQAAA//uUBAACIq5T39BpHRBVynv6DSOiCnUxf6MkdglNpi/0ZI7BHmhAAEFO/XQegjtl1B+xNEHVI6C/+IddMJAm1B+v7bkflnsvfG8/hKq8WWt5F31pZ05M0o8LLalvC5CpTronbnLt3psKDfBYkdsiF/Q3/giox+otmah5oQABBTv10HoI7ZdQfsTRB1SOgv/iHXTCQJtQfr+25H5Z7L3xvP4SqvFlreRd9aWdOTNKPCy2pbwuQqU66J25y7d6bCg3wWJHbIhf0N/4IqMfqLZmoGleNAJO2Y1Sz21zDg3tFyricOO6m9V5zEQUoCCenE75S3emfSWNDzY/7fQ7lPesZGRE9vpdGv2w/h6kl3BEGuhHPvPLkKZBtoCOgxtXDmjzfq/zgUrxoBJ2zHxZ7a5hwb2i5VxOHHdTeq85iIKUBBPTid8pbvTPpLGh5sf9vodynvWMjIie30ujX7Yfw9SS7giDXQjn3nlyFMg20BHQY2rhzR5v1f50xBTUUDAAkIAA//uUBAAAAqs64lDFHRZVZ1xKGKOiysUxf0GkdEFYpi/oNI6I2vuYgopN3D7/t2GeFfdi9xm1qKiWk7GjEIAx1iKZWcM0NZ6IZTb+Ajv5EouqMfLfY4cOG3eQl/M5tLQTaD47LzpGIAINSADUZ1/wt73bS//+791v7XtfcxBRSbuH3/bsM8K+7F7jNrUVEtJ2NGIQBjrEUys4Zoaz0Qym38BHfyJRdUY+W+xw4cNu8hL+ZzaWgm0Hx2XnSMQAQakAGozr/hb3u2l//937rf2v9e8AAgkpkGcEpnmqXUzu8MHddSa7eJsowHFjDTNK5R9gdzqWU3OIC/PZjaH7QoQP+kpLXvnlPZ/PPIWCVcis5rv8iHTNp9VfqWiI6iBgbk0rXr8c213694ABBJTIM4JTPNUupnd4YO66k128TZRgOLGGmaVyj7A7nUspucQF+ezG0P2hQgf9JSWvfPKez+eeQsEq5FZzXf5EOmbT6q/UtER1EDA3JpWvX45trkxBTUUA//uUBAAAAp5T4FEBFtBTynwKICLaCs05f6GkdEFZpy/0NI6Is/vABJJOeD3LmItdrhc71ILLt5ZLSXFjLZgUiknfQiKdur1VOkWPhaQYYCIaCZzZC0iRGVMmpJmOZAilHzCZDNyNCmxF2ytaJEigCMGnwYh9886uz+8AEkk54PcuYi12uFzvUgsu3lktJcWMtmBSKSd9CIp26vVU6RY+FpBhgIhoJnNkLSJEZUyakmY5kCKUfMJkM3I0KbEXbK1okSKAIwafBiH3zzq4QU0UAAEknMChbYr1InElRjJ1CDqC+scWYhh5ds+RsYYiyp8a+WehTwf2U6SKwkUsh9YvpL6kXx5C9+3O2RCpbGdIzKbNDEw5+cKA25CBfSlHGWsGs9UIKaKAACSTmBQtsV6kTiSoxk6hB1BfWOLMQw8u2fI2MMRZU+NfLPQp4P7KdJFYSKWQ+sX0l9SL48he/bnbIhUtjOkZlNmhiYc/OFAbchAvpSjjLWDWepMQU1FAAAAA//uUBAAAAqtGX+hpG8JVaMv9DSN4SpUVg6MMWQlSorB0YYshISgcIAASScsjViwo6O2odhezemsmnE6w6dUkDk4g6gQyqnNmcRTNMHNNC72UjBIzqei2bUFuvkik3mdVLEyfYlX5nM+nMlhX/4dwt44+xAcATsWtYeQlA4QAAkk5ZGrFhR0dtQ7C9m9NZNOJ1h06pIHJxB1AhlVObM4imaYOaaF3spGCRnU9Fs2oLdfJFJvM6qWJk+xKvzOZ9OZLCv/w7hbxx9iA4AnYtaw+WB5tgABpyVnjifyfuRJuctb1jyfNPv/Nh6OQYbMplB1KM7aMfhfjUtScErZMIczzZB6SZKaE+mRIs45Kc/yIE1JhrptU1uP2YO0ET5ZHu64iRrOfcsDzbAADTkrPHE/k/ciTc5a3rHk+aff+bD0cgw2ZTKDqUZ20Y/C/Gpak4JWyYQ5nmyD0kyU0J9MiRZxyU5/kQJqTDXTaprcfswdoInyyPd1xEjWc+0xBTUUDAAkI//uUBAAAAqVPYehoHJJUqew9DQOSStVNh0GEfhFaqbDoMI/Cirb1QQAbkv5g7CYMpuMrmFzBfLTQjWRqMwTpIL4pkXE+n+1nOIexpdAea/zPBHsmblYWk1h5G3v6BrtTyIjhJaaHv5T5YCMGQZaFDOHBxkHUS24K3FW3qggA3JfzB2EwZTcZXMLmC+WmhGsjUZgnSQXxTIuJ9P9rOcQ9jS6A81/meCPZM3KwtJrDyNvf0DXankRHCS00PfynywEYMgy0KGcODjIOoltwVua9UACSk3XUISCKVcKGmnnCNyKF5A9iV+DKAGzm14eKhm5Z2QjMghU9jy7+kKTxyD4eTGH5tRv6+drOQRISwE4mR+IpBSRGBoq4Y8GRQmL7+tEelkfIXTXqgASUm66hCQRSrhQ0084RuRQvIHsSvwZQA2c2vDxUM3LOyEZkEKnseXf0hSeOQfDyYw/NqN/XztZyCJCWAnEyPxFIKSIwNFXDHgyKExff1oj0sj5C5MQU1FAA//uUBAAAAp5PYdBmHwRTyew6DMPgixlJiUGYbBFjKTEoMw2Ceq5AAlJJwya1nINVLjIQqEamZl6/HMUSgzGhrgTnK7ZXOllgzgglEuf/y69+ccuHykRzP4bGIMlpk08nOqVP/UETfl1ewGkXMyVfzIjhA8Pkv/U96rkACUknDJrWcg1UuMhCoRqZmXr8cxRKDMaGuBOcrtlc6WWDOCCUS5//Lr35xy4fKRHM/hsYgyWmTTyc6pU/9QRN+XV7AaRczJV/MiOEDw+S/9T/qrQBJSTlGPFK5K3BJVNHpSQMSA1pDnSORKCA4RI44/5QvbU6b3qDIXWyIiL8YnPuX9IeOh1Hq36X6eTZdExvPUYjivq0EqFAHIMKGQs7yH8YyEuz3EaKBf6q0ASUk5RjxSuStwSVTR6UkDEgNaQ50jkSggOESOOP+UL21Om96gyF1siIi/GJz7l/SHjodR6t+l+nk2XRMbz1GI4r6tBKhQByDChkLO8h/GMhLs9xGigXTEFN//uUBAAAArFc4tDDFXZWK5xaGGKuys07jaSYYlFZp3G0kwxKu7qEAlJuZlCCRzy/qZ3I1tvInPNy5BiWRTpe5+yZPl3+g6UvF3I2XTtn/EZ84V+fKYh1pTjUlwUPgIpr2T/Fyb1YTAwM0x4Ui/hz3ujsv+kypzKHKpTd3UIBKTczKEEjnl/UzuRrbeROeblyDEsinS9z9kyfLv9B0peLuRsunbP+Iz5wr8+UxDrSnGpLgofARTXsn+Lk3qwmBgZpjwpF/DnvdHZf9JlTmUOVSmSQtpEgkptzLjJsfHkzote+1ychqUCXzpA2vmiGF8gwyIu//fVX750sZT256/XuBPHDJC2zP6pg/MnKFW2PIvI0Lybi91gOwsID9f+aAomG7+yt61hA3JIW0iQSU25lxk2PjyZ0Wvfa5OQ1KBL50gbXzRDC+QYZEXf/vqr986WMp7c9fr3AnjhkhbZn9UwfmTlCrbHkXkaF5Nxe6wHYWEB+v/NAUTDd/ZW9awgbTEFN//uUBAAAApNH4+BmHoxSaPx8DMPRiw1PgaGkcIFhqfA0NI4QSUcSRCEoPCTcqKcPBzMoaoC1qOXrjAwyqJS50aHbc4952GrLAqi69XD3vGLlyKnlQTk7DCW5FhWffy/O8nc8+lOl/8YEYHiMRKBcahVuH/9ZUmko4kiEJQeEm5UU4eDmZQ1QFrUcvXGBhlUSlzo0O25x7zsNWWBVF16uHveMXLkVPKgnJ2GEtyLCs+/l+d5O559KdL/4wIwPEYiUC41CrcP/6ypMxkUoAAAtya9QMYKmiLadBZ5GcUsZvWz4yy8cOyjsz4DDxgx11Pyy7QeSfnNjpNOg7msK7u5kdaRUdiMoxmQlEzyrr08ZT5tS+FpRbCvYT6QZ7UHZFz89xZjIpQAABbk16gYwVNEW06CzyM4pYzetnxll44dlHZnwGHjBjrqfll2g8k/ObHSadB3NYV3dzI60io7EZRjMhKJnlXXp4ynzal8LSi2Fewn0gz2oOyLn57i0xBTUUAAA//uUBAAAAphK4sjDE3xTCVxZGGJvizUvf0Gsbwlmpe/oNY3hqn1QFAHhrn5eO7hlATfaCYWhgI+ZAyUBaGDq6+fK46nU2Vc2JCp3RW9iOKiFl7u+prYCRbuO8pKHOq3q6XNcj7u+tsznWUHmBmwKFhGAm3Hy3+mqfVAUAeGufl47uGUBN9oJhaGAj5kDJQFoYOrr58rjqdTZVzYkKndFb2I4qIWXu76mtgJFu47ykoc6rerpc1yPu762zOdZQeYGbAoWEYCbcfLf6UhFAAARTvNUSVEHdigQksrP0zAoXKpOO3nVjsq8TmKNuIJl7lke+hh8h5FY0J5MpC4euq/9NymSnR6pXPTyRLIUhNHL3+tHLZQRPCIOCTCSNtuX4WObz3//IkIoAACKd5qiSog7sUCEllZ+mYFC5VJx286sdlXicxRtxBMvcsj30MPkPIrGhPJlIXD11X/puUyU6PVK56eSJZCkJo5e/1o5bKCJ4RBwSYSRtty/Cxzee//5ExBA//uUBAAAApxTYukBNzRTimxdICbmisU5gaMcekFYpzA0Y49IiURTIJKSScoWFrumouZiaI6gq+G8SCaKVMvHp7fcWqtPazPCQvnntHG4UkRMjTVZbFD5EGCZoRx4+QELkfVtQlXWPGOZsukw8t8dnh4/7q8FJ3kIlEUyCSkknKFha7pqLmYmiOoKvhvEgmilTLx6e33FqrT2szwkL557RxuFJETI01WWxQ+RBgmaEcePkBC5H1bUJV1jxjmbLpMPLfHZ4eP+6vBSd5BJMvIAAAFJ33hvjdOK5lIaEwxvfkKIINp18gRs09CKlVer577RBX357H1JhzLNNWjdqRFs91yufkT//W+8grpM5lpatTPnog+5i3YwSS+mEU0BKL2LxySZeQAAAKTvvDfG6cVzKQ0Jhje/IUQQbTr5AjZp6EVKq9Xz32iCvvz2PqTDmWaatG7UiLZ7rlc/In/+t95BXSZzLS1amfPRB9zFuxgkl9MIpoCUXsXjkxBTUUDAAkIA//uUBAAAAqdM3+hmGvBU6Zv9DMNeCqE9j0GYdDFUJ7HoMw6GYCbMAAACRU5PKdCGMaFKqOQP6jEzAMgvBAxzSKLAgyjG3GxQu5mfv0r/KeDqyxLnyyWEbrnafbyllPztvzTf+O3JaVvt2emf4ooQsWX2hoIjnqAP1sBNmAAABIqcnlOhDGNClVHIH9RiZgGQXggY5pFFgQZRjbjYoXczP36V/lPB1ZYlz5ZLCN1ztPt5Syn5235pv/HbktK327PTP8UUIWLL7Q0ERz1AH66+qkAJJAU1OjJuCOkeQNDumbmXvRuXOaHczR5FCxf9oF6vH8hcv53Wgu5+Zb+xww8L9fUy8oS3SelTUzuZFy5y7eRsNRAasFEALxXUBI0ugCpxpVROvqpACSQFNToybgjpHkDQ7pm5l70blzmh3M0eRQsX/aBerx/IXL+d1oLufmW/scMPC/X1MvKEt0npU1M7mRcucu3kbDUQGrBRAC8V1ASNLoAqcaVUTTEFNRQMACQg//uUBAAAAqdHYujDFzRU6OxdGGLmixFNiUGEYFFiKbEoMIwKSLjaJBBSabubOa1iS3qYKuv32Klp/8dGdYxi1d4zHpoxvrt0KjfxVsxyvztqt8qVnYH1t8nKkWWZ5+RXNelspNDWHMG3ZIpHgwZZCkiihdrVMX160JFxtEggpNN3NnNaxJb1MFXX77FS0/+OjOsYxau8Zj00Y3126FRv4q2Y5X521W+VKzsD62+TlSLLM8/IrmvS2UmhrDmDbskUjwYMshSRRQu1qmL69aJq6ABKSTdoSFKk4QMaEsUuTBag5DRRWZwGiWC/AVECog0WMHKLswtCGDmGkS0/38jTZzU13OvfB2Tvn5gvtCEGs7/IqmenrwyZD7ujcB76G/ijTH604dzL5q6ABKSTdoSFKk4QMaEsUuTBag5DRRWZwGiWC/AVECog0WMHKLswtCGDmGkS0/38jTZzU13OvfB2Tvn5gvtCEGs7/IqmenrwyZD7ujcB76G/ijTH604dzL0w//uUBAAAApcs4+hhG55S5Zx9DCNzyv1Fa6GEaBlfqK10MI0DbbakQIBRIBjKqo1UxSlDIcZ9SasydRLcd0f14DNyzJtsB2VmNjUlbalGY4ZfqW0FEh0cO2/nGr4uhVcHf/y/834kgz+VG/SsNt2X/0RWv/ZC2crbbUiBAKJAMZVVGqmKUoZDjPqTVmTqJbjuj+vAZuWZNtgOysxsakrbUozHDL9S2gokOjh23841fF0Krg7/+X/m/EkGfyo36Vhtuy/+iK1/7IWzlcaSaRABKSbixxLUmWpqTLDybaoarHJqjBQaGsP2akyzLKUmud1hrDJod2sNasqyk0/mTLUNfX58/ZVjiYay/wyZYX/5M1I1DGsh0ukwWZuFooll/GYqiiuNJNIgAlJNxY4lqTLU1Jlh5NtUNVjk1RgoNDWH7NSZZllKTXO6w1hk0O7WGtWVZSafzJlqGvr8+fsqxxMNZf4ZMsL/8makahjWQ6XSYLM3C0USy/jMVRRUxBTUUAAA//uUBAAP8pclQgBmGsJDxKh2DGNKAAABpAAAACAAADSAAAAEAgaOjjMtla1JERRR6C0UjThJaCQkNUPhk1lL/6TBQ0eWWKGDAwVjpQQJ1WKr/2nf7Bqq1f0E1RFgmha3//qg1cNV3///2mn//1SVav6K1TLBNEwA6pAANZUMmtljkyhgToOMKUMFBiBQCGBochk1lI/5SYKGBPLLAoYMDlllBAnMu/4sL8KizTQ9j/xguz//SpvW2aCoomIKaigYAEhAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+  audio.autoplay = true;
+
+  var container = document.getElementById("audio-container");
+  container.appendChild(audio);
+</script>
+
+
+
+:: maze1 {"position":"675,1775","size":"100,100"}
+You are at the entrence of a maze.
+There is a gun and a magazine.
+You picked them up.
+(live: 3s)[
+  (goto: "maze2")
+]
+
+
+
+:: maze10 {"position":"1375,1850","size":"100,100"}
+<h1> ENTER THE CODE TO START THE TRAIN </h1>
+(set: $enteredCode to "")
+
+Enter the access code:
+
+(input-box: bind $enteredCode, "X", 1)
+
+(link: "Submit")[
+  (if: (lowercase: $enteredCode) is "4829")[
+    Access granted!
+    
+    [[Proceed Forward|maze11]]
+  ](else:)[
+    Invalid code. Try again.
+  ]
+]
+[[Back|maze8]] 
+
+
+:: maze11 {"position":"1300,1575","size":"100,100"}
+The terminal lights up but the train does not turn on.
+You read the terminal.
+(text-colour:red)[Warning! This train is mising a battery in slot 5b.]
+
+
+(if: $inventory contains "Battery")[
+  You slot the Battery into the train console!
+  The terminal updates and says: This train is ready to depart!
+  [[Get on Train|train1]]
+](else:)[
+  $playerName: "I need to find a battery somewhere.
+  Maybe its in one of these tunnels?"
+]
+
+[[Back|maze10]] 
+
+
+:: maze12 {"position":"950,1925","size":"100,100"}
+There is a small wooden box.
+[[Open Box|box1]]
+[[Back|maze4]] 
+
+
+
+:: maze2 {"position":"800,1775","size":"100,100"}
+You have obtained a gun!
+[[Cool!|maze3]]
+(set: $inventory to $inventory + (a: "Gun"))
+
+
+:: maze3 {"position":"900,1625","size":"100,100"}
+[[Left|maze4]]  ''OR'' [[Right|maze5]]
+
+
+:: maze4 {"position":"925,1775","size":"100,100"}
+You come into a round room illuminated by a torch.
+[[Go Further|maze12]]
+[[Back|maze3]]
+
+
+
+:: maze5 {"position":"1050,1800","size":"100,100"}
+[[Strait|maze6]] ''OR'' [[Door|maze7]]''OR ''  [[Back|maze3]] 
+
+
+
+:: maze6 {"position":"1025,1600","size":"100,100"}
+(unless: $doorUnlocked is true)[(set: $doorUnlocked to false)]
+
+<h3>DOOR ACCESS PANEL - SEQUENTIAL KEYPAD</h3>
+<p>Watch the pattern and repeat it back by clicking the colored buttons!</p>
+
+<div style="text-align: center;">
+  <div id="simon-status" style="color: #ffff00; font-weight: bold; font-family: monospace; margin-bottom: 15px;">Press Start to Begin</div>
+  
+  <table style="margin: 0 auto; border-collapse: collapse; border: none;">
+    <tr>
+      <td style="padding: 5px; border: none;">
+        <button id="btn-0" style="width: 90px; height: 90px; background-color: #880000; border: 2px solid #fff; border-radius: 8px; cursor: pointer;"></button>
+      </td>
+      <td style="padding: 5px; border: none;">
+        <button id="btn-1" style="width: 90px; height: 90px; background-color: #008800; border: 2px solid #fff; border-radius: 8px; cursor: pointer;"></button>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px; border: none;">
+        <button id="btn-2" style="width: 90px; height: 90px; background-color: #000088; border: 2px solid #fff; border-radius: 8px; cursor: pointer;"></button>
+      </td>
+      <td style="padding: 5px; border: none;">
+        <button id="btn-3" style="width: 90px; height: 90px; background-color: #888800; border: 2px solid #fff; border-radius: 8px; cursor: pointer;"></button>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <button id="start-btn" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">START SYSTEM</button>
+</div>
+
+<br>
+
+<div id="win-link-container" style="display: none; text-align: center; font-size: 1.2em;">
+  <span style="color: #00ff00; font-weight: bold;">*CLICK* System Override Accepted!</span><br><br>
+  (link: "Return to Door")[(set: $doorUnlocked to true)(goto: "maze7")]
+</div>
+
+<br><br>
+
+<div style="text-align: center;">
+  [[Step Back|maze7]]
+</div>
+
+<script>
+(function() {
+  const colors = [
+    { base: '#880000', active: '#ff0000' },
+    { base: '#008800', active: '#00ff00' },
+    { base: '#000088', active: '#0088ff' },
+    { base: '#888800', active: '#ffff00' }
+  ];
+
+  let sequence = [];
+  let playerStep = 0;
+  let isPlayingSequence = false;
+  let isProcessingClick = false;
+  let gameWon = false;
+  const targetRounds = 7; 
+
+  const status = document.getElementById('simon-status');
+  const startBtn = document.getElementById('start-btn');
+  const winLink = document.getElementById('win-link-container');
+  const buttons = [
+    document.getElementById('btn-0'),
+    document.getElementById('btn-1'),
+    document.getElementById('btn-2'),
+    document.getElementById('btn-3')
+  ];
+
+  function flashButton(index, duration = 250) {
+    return new Promise(resolve => {
+      buttons[index].style.backgroundColor = colors[index].active;
+      buttons[index].style.boxShadow = `0 0 15px ${colors[index].active}`;
+      setTimeout(() => {
+        buttons[index].style.backgroundColor = colors[index].base;
+        buttons[index].style.boxShadow = 'none';
+        setTimeout(resolve, 100);
+      }, duration);
+    });
+  }
+
+  async function playSequence() {
+    isPlayingSequence = true;
+    status.innerText = "Observe Sequence...";
+    playerStep = 0;
+
+    for (let i = 0; i < sequence.length; i++) {
+      await flashButton(sequence[i], 350);
+    }
+
+    isPlayingSequence = false;
+    status.innerText = `Your turn! (${sequence.length}/${targetRounds})`;
+  }
+
+  function nextRound() {
+    sequence.push(Math.floor(Math.random() * 4));
+    playSequence();
+  }
+
+  startBtn.onclick = function() {
+    startBtn.style.display = 'none';
+    winLink.style.display = 'none';
+    sequence = [];
+    gameWon = false;
+    nextRound();
+  };
+
+  buttons.forEach((btn, idx) => {
+    btn.onclick = async function() {
+      if (isPlayingSequence || isProcessingClick || sequence.length === 0 || gameWon) return;
+
+      isProcessingClick = true;
+      const expectedIndex = sequence[playerStep];
+
+      await flashButton(idx, 150);
+
+      if (idx === expectedIndex) {
+        playerStep++;
+        if (playerStep === sequence.length) {
+          if (sequence.length === targetRounds) {
+            gameWon = true;
+            
+            // Set variable via Harlowe API directly
+            if (window.Harlowe && window.Harlowe.variableState) {
+              Harlowe.variableState.set('doorUnlocked', true);
+            }
+            
+            status.innerHTML = "<span style='color: #00ff00; font-size: 1.2em;'>ACCESS GRANTED!</span>";
+            winLink.style.display = 'block';
+          } else {
+            status.innerText = "Correct! Get ready...";
+            setTimeout(nextRound, 800);
+          }
+        }
+      } else {
+        status.innerHTML = "<span style='color: #ff5555;'>ACCESS DENIED! TRY AGAIN</span>";
+        startBtn.style.display = 'inline-block';
+        startBtn.innerText = 'RETRY';
+        sequence = [];
+      }
+
+      isProcessingClick = false;
+    };
+  });
+})();
+</script>
+
+
+:: maze7 {"position":"1175,1600","size":"100,100"}
+(if: $doorUnlocked is true)[
+  The door is unlocked! 
+  
+  [[Walk through the door|maze8]]
+](else:)[
+  The heavy door is locked tight. You need to clear the access panel puzzle first.
+  
+  [[Go to Access Panel|maze6]]
+]
+
+
+:: maze8 {"position":"1175,1800","size":"100,100"}
+You come accross an abandoned train, but you need a code to use it.
+[[Enter Train|maze10]]
+[[Search Room|maze9]]
+[[Go Through Door|maze5]]
+
+
+:: maze9 {"position":"1300,1700","size":"100,100"}
+<p>You enter a pitch-black room. The walls are covered in dark charcoal dust.</p>
+
+<div style="background-color: #111; padding: 20px; border: 1px solid #222; text-align: center; position: relative;">
+  <p style="margin: 0; font-family: monospace;">
+    THE CODE IS: <span id="secretCode" style="color: #111; user-select: text;">4829</span>
+  </p>
+  
+  <button onclick="alert('The code is 4829');" style="width: 3px; height: 3px; padding: 0; border: none; background-color: #181818; cursor: pointer; position: absolute; bottom: 2px; right: 5px;" title="???"></button>
+</div>
+
+<br>
+
+<div style="text-align: center;">
+  <button onclick="document.getElementById('secretCode').style.color = '#00ff00';" style="width: 4px; height: 4px; padding: 0; border: none; background-color: #222; cursor: pointer;" title="Flashlight"></button>
+</div>
+[[Back|maze8]] 
+
+
+:: normalleft {"position":"1575,1375","size":"100,100"}
+The worker runs off to the distance, well out of your guns range.
+$playerName: "Oh well, I guess he gets to live."
+You continue on for a bit and stop at a small platform.
+[[Get off Train|platform1]]
+
+
+:: normalright {"position":"1750,1425","size":"100,100"}
+The workers runs off to the distance, well out of your guns range.
+$playerName: "Oh well, I guess they get to live."
+You continue on for a bit and stop at a small platform.
+[[Get off Train|platform1]]
+
+
+:: office1 {"position":"2175,850","size":"100,100"}
+You come across a untouched desk with a computer monitor on, casting an eerie glow on the surrounding area.
+Somewhere, a shadow moved. You pull out your gun.
+Something rustles behind you and you turn, prepared to shoot.
+Only a rat.
+$playerName: "This place gets on my nerves"
+(after: 5s)[(goto: "office2")]
+
+
+:: office2 {"position":"2275,850","size":"100,100"}
+You feel the cool metal of a gun at the back of your neck.
+
+$playerName: "YELP! Not only a rat!"
+
+A voice comes from behind you.
+
+Person: "Yes. Took you long enough to notice. You're not very good at this, are you?"
+
+$playerName: "What?"
+
+Person: "You're one of Smith's people, aren't you?"
+
+$playerName: "Who's Smith?"
+
+Person: "Don't act dumb with me! I've killed many of you before!"
+
+$playerName: *gulp* "Killed? But I did nothing to you!"
+
+Person: *snorts* "Did nothing? DID NOTHING? You're part of a security squad that tried to kill over 10 people, including me, and probably then some!"
+
+$playerName: "What? I just got a new job working in a boring office!"
+
+Person: "Prove it."
+
+$playerName: "Here's my ID card..."
+
+[[Show ID|office3]]
+
+
+:: office3 {"position":"2350,1000","size":"100,100"}
+{
+(set: _ID to "")
+(set: _NAME to "")
+(set: _WORKER to "")
+(set: _LEVEL to "")
+(set: _CREATED to "")
+(set: _STATUS to "")
+(set: _OF_999 to "")
+}
+<pre>
+================================================================================
+  _   _  .-----.  .-----.     |  UNIFIED SYSTEMS ENGINEERING
+ | | | | |  ___|  |  ___|     |  LOCAL WORKSTATION LOGISTICS
+ | | | | | |__    | |__       |  --------------------------------------
+ | | | | `-.  `-. |  __|      |  TERMINAL DESIGNATION: NODE\_105
+ | `--' | .---|  | | |___     |  REGISTRATION INDEX:   105\_OF\_999
+  `____'  `_____/  |_____|     |  ALLOCATED LOCATION:   STATION\_105
+=======================================================================
+
+STAFF\_ID:     ST-0489-U
+FULL\_NAME:    $playerName
+ROLE:         OFFICE\_WORKER
+DEPARTMENT:   FILING & ARCHIVES
+ACCESS\_LEVEL: GRADE\_6 (HIGH RESTRICTED DATA ACCESS)
+DATE\_CREATED: 2026-08-12
+
+BARCODE ALLOCATION:
+[ ||||| | |||| ||| | ||| |||| | ] *ST-0489-DAT-105*
+
+CARD\_STATUS: ACTIVE // GRADE\_6
+=======================================================
+</pre>
+
+[[Show|office4]]
+
+
+:: office4 {"position":"2425,850","size":"100,100"}
+Person: "Office worker in the files and archives dept hu?
+Wow. That must be pretty boaring. Though today was your first day by the look of things.
+Why are you even down here? This is the old office from when USE ran a newspaper."
+$playerName: "I might of triggered the emergency overide allarm."
+Person: "How on your first day did u do that?"
+$playerName: "Someone was rather lazy and left a box that said overide in the drawer. So once i unlocked it i might of set an alarm off. I didnt want to get fired so I went down the trapdoor that opened.
+Person: "Well $playername, i suppose now you've given away your story of how you got here, i suppose I must give mine."
+
+[[Continue|office5]]
+
+
+:: office5 {"position":"2250,725","size":"100,100"}
+Person: "My name is Robert Garrison."
+(after: 2s)[(goto: "office6")]
+
+
+:: office6 {"position":"2150,725","size":"100,100"}
+Robert: "I was hired by United Systems Engineering under the guise of an IT technology consultancy. I had no idea why when I got interviewed. Why would a mainstream tech firm want someone with a high-level background in neurological science? Then I found out why. 
+USE deals in cloning."
+
+$playerName: "You. Are. Mad."
+
+Robert: "No, I'm not. Once they realized I had an engineering degree, they reassigned me to maintenance—specifically to keep the neural transfer tanks running. But when the whole operation started falling apart, they tried to dispose of us. Over ten employees including my brother from different departments were targeted to cover their tracks."
+
+$playerName: "No. It can't be."
+
+Robert: "Yes, it can. Think about it. You read those terms and conditions: 'USE reserves the unilateral right to initiate immediate, non-negotiable biological or functional decommission of any Asset at any time, for any reason.'
+Just think about it. The introduction booklet as well: 'Our facility specializes in mass-scale replication.' The evidence was hiding in plain sight the entire time."
+
+Robert: "You agreed to the fact that they can kill you: 'including but not limited to operational variance, cognitive deviation, or routine resource reallocation.'
+You didn't realize the consequences of accepting these terms. None of us did—and we paid for it dearly."
+
+Robert: "The three of us who survived have tried to escape, but the most we could do was evade security officers. So this is where we've been living."
+
+Robert: "We have been trying to uncover files but have been quite usuccsessful as we have no ID cards."
+
+[[Continue|office7]]
+
+
+:: office7 {"position":"1975,625","size":"100,100"}
+You feel compelled to help.
+(after: 2s)[(goto: "office8")]
+
+
+:: office8 {"position":"1875,625","size":"100,100"}
+$playerName: "I would like to help you. I have an ID card, and as someone who handles archives, I'll be able to find more files."
+
+Robert: "Thank you so much! I'll take you to the others. Just follow me."
+
+[[Follow Robert|office9]]
+
+
+:: office9 {"position":"1675,575","size":"100,100"}
+You meet the others, Linda and Thomas.
+
+Thomas: "You work in archiving, huh?"
+
+$playerName: "Yes. Yes, I do."
+
+Thomas: "Well, we found a working computer down by Bay 005."
+
+Linda: "We haven't been able to get far, though. We got our hands on a guest ID, but that only gave us limited access."
+
+Robert: "You have an ID, so why don't we go down there and see if it works?"
+
+$playerName: "But I'm on the lowest clearance level. I just joined!"
+
+Linda: "Yes, but this is an old system, and it has security flaws. Any staff ID can get us somewhere."
+
+$playerName: "It's worth a try, I guess."
+
+[[Go To Computer 005|desk2]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:: outcome_left {"position":"1425,1400","size":"100,100"}
+You feel the bodys of the 5 workers thud beneith the crushing wheels of the train and see the other worker look in horror at you.
+$playerName: "If he gets back to the facility, he will tell everyone about what I did!
+If that happens, I'll get fired for sure."
+$playerName: "I could kill him with my gun I suppose."
+[[Kill worker|violentleft]] '' OR '' [[Let Worker Go|normalleft]]
+{(set: $killCount to $killCount + 5)}
+
+
+:: outcome_right {"position":"1450,1525","size":"100,100"}
+You feel the bodys of the worker thud beneith the crushing wheels of the train and see the other workers look in horror at you.
+$playerName: "If they get back to the facility, they will tell everyone about what I did!
+If that happens, I'll get fired for sure."
+$playerName: "I could kill them with my gun I suppose, but I'll only be able to kill 3 of them."
+[[Kill 3 workers|violentright]] '' OR '' [[Let Workers Go|normalright]]
+{(set: $killCount to $killCount + 1)}
+
+
+:: outcome_stop {"position":"1500,1075","size":"100,100"}
+The train screeches to a halt and the relieved workers dont even wait to thank you, and they run the way you came. You press the start button and the train speeds along until you reach a small platform.
+[[Get off Train|platform1]]
+
+
+:: pclogin {"position":"850,950","size":"100,100"}
+===================================================================
+ UNIFIED SYSTEMS ENGINEERING // TERMINAL LOGIN
+===================================================================
+
+(if: $inventory is 0 or not ($inventory contains "ID Card"))[
+  ''CARD READER REQUIRED''
+  You need an ID Card to access this terminal.
+
+  [[Back|desk1]]
+](else:)[
+  [
+    (link: "💳 Swipe ID Card")[
+      (replace: ?login)[
+        Username: (if: $playerName is not 0)[$playerName](else:)[UNKNOWN]
+        Password: (input: bind $passwordAttempt, "")
+
+        (link: "LOGIN")[
+          (if: $passwordAttempt is "1111")[
+            (goto: "Desktop")
+          ](else:)[
+            (replace: ?error)[ACCESS DENIED: Invalid Password.]
+          ]
+        ]
+
+        [ ]<error|
+      ]
+    ]
+  ]<login|
+
+  [[Back|desk1]]
+]
+
+
+:: platform1 {"position":"1825,1200","size":"100,100"}
+You are standing on a small dusty platform.
+You can make out 5 doors.
+$playerName: "I dont know where I am but people will find me if I stay here.
+I should go through a door"
+[[Door 1|door1]] ''OR '' [[Door 2 |door2]]'' OR '' [[Door 3|door3]]'' OR '' [[Door 4|door4]]'' OR '' [[Door 5|door5]]
+
+
+:: spider1 {"position":"1625,875","size":"100,100"}
+You shoot the spider with your gun.
++1 animal kill
+{(set: $animalKills to $animalKills + 1)}
+{(set: $spiderKilled to true)}
+[[Cool!|platform1]] 
+
+
+
+:: train1 {"position":"1275,1450","size":"100,100"}
+You sit at the drivers seat and try to figure out the controls.
+[[Continue|train2]]
+
+
+:: train2 {"position":"1400,1275","size":"100,100"}
+<pre>
+|announcementBox>[
++--------------------------------------------------+
+| SYSTEM STANDBY: ENGINE OFF                       |
+| PRESS [ START ENGINE ] TO BEGIN                  |
++--------------------------------------------------+
+]
+</pre>
+
+### TRAIN CONTROLS
+==================================================
+
+{(set: $termStatus to "STANDBY")
+(set: $termTrack to "LEFT")
+(set: $engineStarted to false)
+(set: $alarmActive to false)
+(set: $commandInput to "")}
+
+<pre>
+|termDisplay>[
+  `SYS_STATUS`: $termStatus
+  `CURRENT_TRACK`: $termTrack
+]
+</pre>
+
+==================================================
+
+#### QUICK OVERRIDE CONTROLS
+
+|startBtn>[(link-repeat: "[ START ENGINE ]")[{
+  (if: not $engineStarted)[
+    (set: $engineStarted to true)
+    (set: $termStatus to "MOVING")
+    (replace: ?termDisplay)[
+  `SYS_STATUS`: $termStatus
+  `CURRENT_TRACK`: $termTrack
+    ]
+    (replace: ?announcementBox)[
++--------------------------------------------------+
+| ENGINE ONLINE: PROCEEDING DOWN MAIN LINE         |
++--------------------------------------------------+
+    ]
+    (replace: ?outputBox)[Engine started. Accelerating...]
+    
+    (live: 5s)[
+      (stop:)
+      (set: $alarmActive to true)
+      (replace: ?announcementBox)[
++--------------------------------------------------+
+| ! WARNING: PEOPLE DETECTED ON TRACKS !           |
+| LEFT TRACK  : 5 MAINTENANCE WORKERS (EVACUATING) |
+| RIGHT TRACK : 1 MAINTENANCE WORKER  (EVACUATING) |
++--------------------------------------------------+
+      ]
+      (replace: ?rightBtn)[(link-repeat: "DIVERT RIGHT >")[{
+        (set: $termTrack to "RIGHT")
+        (goto: "outcome_right")
+      }]]
+      (replace: ?outputBox)[WARNING: OBSTACLES DETECTED AHEAD! COLLISION IMMINENT IN 15 SECONDS!]
+      (live: 15s)[
+        (stop:)
+        (goto: "outcome_left")
+      ]
+    ]
+  ]
+}]]
+
+<br>
+
+<span style="opacity:0.5;">[ < DIVERT LEFT (CURRENT TRACK) ]</span>
+
+|rightBtn>[<span style="opacity:0.5;">[ DIVERT RIGHT > (LOCKED) ]</span>]
+
+==================================================
+
+<pre>
+|outputBox>[Type 'help' for a list of available commands.]
+</pre>
+
+<br>
+INPUT COMMAND:
+(input: bind $commandInput, "=value")
+
+(link-repeat: "EXECUTE")[{
+  (set: $cleanCmd to (lowercase: $commandInput))
+  
+  (if: $cleanCmd is "help")[
+    (replace: ?outputBox)[
+AVAILABLE COMMANDS:
+* ''help'' - Displays command list
+* ''start'' - Start train engine
+* ''right'' - Divert switch to Right Track (requires alarm active)
+* ''stop'' - Emergency brake override (requires alarm active)
+    ]
+  ](else-if: $cleanCmd is "start")[
+    (if: not $engineStarted)[
+      (set: $engineStarted to true)
+      (set: $termStatus to "MOVING")
+      (replace: ?termDisplay)[
+  `SYS_STATUS`: $termStatus
+  `CURRENT_TRACK`: $termTrack
+      ]
+      (replace: ?announcementBox)[
++--------------------------------------------------+
+| ENGINE ONLINE: PROCEEDING DOWN MAIN LINE         |
++--------------------------------------------------+
+      ]
+      (replace: ?outputBox)[Engine started. Accelerating...]
+      
+      (live: 5s)[
+        (stop:)
+        (set: $alarmActive to true)
+        (replace: ?announcementBox)[
++--------------------------------------------------+
+| ! WARNING: PEOPLE DETECTED ON TRACKS !           |
+| LEFT TRACK  : 5 MAINTENANCE WORKERS (EVACUATING) |
+| RIGHT TRACK : 1 MAINTENANCE WORKER  (EVACUATING) |
++--------------------------------------------------+
+        ]
+        (replace: ?rightBtn)[(link-repeat: "DIVERT RIGHT >")[{
+          (set: $termTrack to "RIGHT")
+          (goto: "outcome_right")
+        }]]
+        (replace: ?outputBox)[WARNING: OBSTACLES DETECTED AHEAD! COLLISION IMMINENT IN 7 SECONDS!]
+        (live: 7s)[
+          (stop:)
+          (goto: "outcome_left")
+        ]
+      ]
+    ](else:)[
+      (replace: ?outputBox)[Engine is already running!]
+    ]
+  ](else-if: $cleanCmd is "left")[
+    (replace: ?outputBox)[Train is already on the LEFT track.]
+  ](else-if: $cleanCmd is "right")[
+    (if: $alarmActive is true)[
+      (set: $termTrack to "RIGHT")
+      (goto: "outcome_right")
+    ](else:)[
+      (replace: ?outputBox)[Error: Track switches are locked or offline.]
+    ]
+  ](else-if: $cleanCmd is "stop")[
+    (if: $alarmActive is true)[
+      (set: $termStatus to "STOPPED")
+      (goto: "outcome_stop")
+    ](else:)[
+      (replace: ?outputBox)[Error: Emergency override offline until hazards detected.]
+    ]
+  ](else:)[
+    (replace: ?outputBox)[''$commandInput'' is not recognized. Type 'help' for options.]
+  ]
+}]
+
+
+:: tunnel1 {"position":"2250,1075","size":"100,100"}
+(if: $inventory contains "Torch")[
+You head down and pass numerous desks, all of them looking like something had tried to destroy the wood down to the last atom.
+
+$playerName: "What the... How the... Whaaaaat?
+What is USE hideing? I thought the T&Cs were a bit fishy."
+
+[[Continue Further|office1]]
+](else:)[
+You go through the narrow path and emerge in a abandoned office.
+
+$playerName: "Its too dark down here for me to continue. Maybe there is a torch through another door?"
+
+[[Go back|platform1]]
+]
+
+
+:: violentleft {"position":"1525,1225","size":"100,100"}
+You shoot the worker with your gun and he dies instantly.
+(text-colour:red)[+1 kill]
+{(set: $killCount to $killCount + 1)}
+You continue on for a bit and stop at a small platform.
+[[Get off Train|platform1]]
+
+
+:: violentright {"position":"1825,1600","size":"100,100"}
+You shoot the 3 workers with your gun and they die instantly.
+(text-colour:red)[+3 kills]
+The remaining workers bolt and get out of your range.
+{(set: $killCount to $killCount + 3)}
+You continue on for a bit and stop at a small platform.
+[[Get off Train|platform1]]
+
+
+:: StoryStylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+  background-color: #030405;
+  margin: 0;
+  padding: 20px;
+}
+
+tw-story {
+  font-family: 'Courier Prime', monospace;
+  font-size: 18px;
+  line-height: 1.5;
+  background-color: #0f1115;
+  color: #d1d5db;
+  
+  width: 90%;
+  max-width: 1100px;
+  padding: 40px;
+  margin: 20px auto;
+  
+  /* --- HARDWARE BEZEL & CRT CURVE EFFECT --- */
+  border: 14px solid #1a1d24;
+  border-radius: 35px;
+  
+  box-shadow: 
+    0 0 30px rgba(0, 0, 0, 0.9),
+    inset 0 0 50px rgba(0, 0, 0, 0.85),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+    
+  /* SUBTLER CRT GLOW */
+  text-shadow: 0 0 1px rgba(209, 213, 219, 0.4), 0 0 3px rgba(56, 189, 248, 0.2);
+  
+  position: relative;
+  overflow: hidden;
+}
+
+tw-story::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+tw-link {
+  color: #38bdf8;
+  font-weight: bold;
+  text-decoration: none;
+  /* Subtler link glow */
+  text-shadow: 0 0 2px rgba(56, 189, 248, 0.5);
+}
+
+tw-link:hover {
+  color: #7dd3fc;
+  text-decoration: underline;
+  text-shadow: 0 0 4px rgba(125, 211, 252, 0.6);
+}
+
+tw-sidebar {
+  display: none;
+}
